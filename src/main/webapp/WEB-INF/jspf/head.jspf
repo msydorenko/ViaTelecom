@@ -11,4 +11,9 @@
     as you set them in a page directive.
     ===========================================================================--%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%--===========================================================================
+    Script for capcha
+    ===========================================================================--%>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript" src="js/capcha.js"></script>
 </head>
