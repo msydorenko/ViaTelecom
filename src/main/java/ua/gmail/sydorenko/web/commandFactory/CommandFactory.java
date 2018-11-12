@@ -39,6 +39,7 @@ public class CommandFactory {
         commandList.put("userSubscribeTariff", new UserSubscribeTariffCommand());
         commandList.put("userUnsubscribeTariff", new UserUnsubscribeTariffCommand());/*no*/
         commandList.put("locale", new I18NCommand());
+        commandList.put("download", new DownloadCommand());
 
         commandList.put("logout", new LogoutCommand());
     }

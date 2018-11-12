@@ -85,7 +85,7 @@
                             <fmt:message key="table.tariff.subscribe"/>
                         </c:otherwise>
                     </c:choose>
-                    </th>
+                </th>
                 <c:if test="${userRole.name eq 'admin'}">
                     <th><fmt:message key="table.tariff.delete"/></th>
                 </c:if>
@@ -147,6 +147,13 @@
             </c:forEach>
         </table>
     </c:if>
+</div>
+<div>
+    <form class="" method="post" action="viatelecom?command=download">
+        <button class="" type="submit">
+            <fmt:message key="admin.button.download"/>
+        </button>
+    </form>
 </div>
 <c:if test="${userRole.name eq 'admin'}">
     <div>
