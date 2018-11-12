@@ -1,9 +1,9 @@
 package ua.gmail.sydorenko.web.commandFactory;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.UserDao;
-import ua.gmail.sydorenko.database.dao.UserDaoImpl;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.entity.Address;
 import ua.gmail.sydorenko.database.entity.Role;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
@@ -38,10 +38,14 @@ public class LoginCommand implements Command {
             return forward;
         }
 
-        UserDao service = new UserDaoImpl();
-        User user = service.readByLogin(login).get(0);
+        UserDao userDao = new UserDaoImpl();
+        BillDao billDao = new BillDaoImpl();//TODO
+        AddressDao addressDao = new AddressDaoImpl();//TODO
+        ContactDao contactDao = new ContactDaoImpl();//TODO
+
+        User user = userDao.readByLogin(login).get(0);
         LOG.trace("Found in DB: user --> " + user);
-        List<Tariff> tariffList = service.readTariffForUser(user);
+        List<Tariff> tariffList = userDao.readTariffForUser(user);
         for (Tariff tariff : tariffList) {
             user.getTariffs().add(tariff);
         }
