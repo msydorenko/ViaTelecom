@@ -15,10 +15,10 @@
         <input type="hidden" name="command" value="login"/>
         <input type="text" name="login" placeholder="Login">
         <input type="password" name="password" placeholder="Password">
-        <div class="g-recaptcha" align="center" data-sitekey="6LeQPnoUAAAAACX1F1RAO2wYTB8kh7ThB6o-5w4P"></div>
+        <%--<div class="g-recaptcha" &lt;%&ndash;align="center"&ndash;%&gt; data-sitekey="6LeQPnoUAAAAACX1F1RAO2wYTB8kh7ThB6o-5w4P"></div>
         <span id="captcha" style="margin-left:100px;color:red"></span><br/>
-        <input type="button" onclick="validate(this.form)" value="<fmt:message key="login.button.login"/>"/>
-        <%--<input type="submit"  value="<fmt:message key="login.button.login"/>">--%>
+        <input type="button" onclick="validate(this.form)" value="<fmt:message key="login.button.login"/>"/>--%>
+        <input type="submit"  value="<fmt:message key="login.button.login"/>">
     </form>
 </div>
 

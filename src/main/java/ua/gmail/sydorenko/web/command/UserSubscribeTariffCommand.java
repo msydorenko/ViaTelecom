@@ -1,11 +1,9 @@
 package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.TariffDao;
-import ua.gmail.sydorenko.database.dao.TariffDaoImpl;
-import ua.gmail.sydorenko.database.dao.UserDao;
-import ua.gmail.sydorenko.database.dao.UserDaoImpl;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
 
@@ -25,10 +23,12 @@ public class UserSubscribeTariffCommand implements Command {
         HttpSession session = request.getSession(false);
         UserDao userDao = new UserDaoImpl();
         TariffDao tariffDao = new TariffDaoImpl();
+        BillDao billDao = new BillDaoImpl();
 
         User user = (User) session.getAttribute("user");
         int userId = user.getId();
-        int currentBalance = user.getBill().getValue();
+        Bill bill = user.getBill();
+        int currentBalance = bill.getValue();
         LOG.trace("Current bill value: " + currentBalance);
 
         int tariffId = Integer.parseInt(request.getParameter("tariffId"));
@@ -48,6 +48,9 @@ public class UserSubscribeTariffCommand implements Command {
         } else {
             user.getTariffs().add(tariff);
             userDao.createTariffForUser(userId, tariffId);
+            bill.setValue(resultBalance);
+            user.setBill(bill);
+            billDao.update(bill);
         }
 
         session.setAttribute("user", user);

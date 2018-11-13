@@ -17,15 +17,15 @@ public class OpenEditTariffPageCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
-        LOG.debug("Command open page to update starts");
+        LOG.debug("Command 'open page to update' starts");
         int tariffId = Integer.parseInt(request.getParameter("tariffId"));
         LOG.trace("Id tariff for update --> " + tariffId);
+
         TariffDao service = new TariffDaoImpl();
         Tariff tariff = service.readById(tariffId).get(0);
-        System.out.println(tariff.getName() + " " + tariffId);
         request.setAttribute("tariffForUpdate", tariff);
         LOG.trace("Tariff for update --> " + tariffId);
-        LOG.debug("Command open page for update end");
+        LOG.debug("Command 'open page for update' end");
         return Path.PAGE_OPEN_EDIT_TARIFF;
     }
 }
