@@ -14,12 +14,12 @@ function get_action(form) {
     var v = grecaptcha.getResponse();
     if(v.length == 0)
     {
-        document.getElementById('captcha').innerHTML="You can't leave Captcha Code empty";
+        document.getElementById('captcha').innerHTML="Confirm that you are not a robot!";
         return false;
     }
     if(v.length != 0)
     {
-        document.getElementById('captcha').innerHTML="Captcha completed";
+        document.getElementById('captcha').innerHTML="Congratulation! You can enter.";
         return true;
     }
 }

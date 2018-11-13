@@ -1,4 +1,4 @@
-package ua.gmail.sydorenko.web.commandFactory;
+package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;

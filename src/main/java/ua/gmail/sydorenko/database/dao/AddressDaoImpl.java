@@ -1,12 +1,10 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.MySQLManager;
+import ua.gmail.sydorenko.database.MySQLManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Address;
-import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.template.AddressTemplate;
-import ua.gmail.sydorenko.database.template.BillTemplate;
 import ua.gmail.sydorenko.database.template.Template;
 
 import java.util.List;

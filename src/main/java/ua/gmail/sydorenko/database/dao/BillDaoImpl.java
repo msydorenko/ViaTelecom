@@ -1,7 +1,7 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.MySQLManager;
+import ua.gmail.sydorenko.database.MySQLManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.template.BillTemplate;
@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class BillDaoImpl implements BillDao {
     private static final Logger LOG = Logger.getLogger(BillDaoImpl.class);
-    private static final String SQL_CREATE_BILL = "INSERT INTO viatelecom.spr_bills (number, balance) VALUES (?, ?)";
-    private static final String SQL_READ_ALL_BILLS = "SELECT id, number, balance FROM viatelecom.spr_bills";
-    private static final String SQL_READ_BILL_BY_ID = "SELECT id, number, balance FROM viatelecom.spr_bills WHERE id = ?";
-    private static final String SQL_UPDATE_BILL = "UPDATE viatelecom.spr_bills SET balance = ? WHERE id = ?";
+    private static final String SQL_CREATE_BILL = "INSERT INTO viatelecom.spr_bills (number, value) VALUES (?, ?)";
+    private static final String SQL_READ_ALL_BILLS = "SELECT id, number, value FROM viatelecom.spr_bills";
+    private static final String SQL_READ_BILL_BY_ID = "SELECT id, number, value FROM viatelecom.spr_bills WHERE id = ?";
+    private static final String SQL_UPDATE_BILL = "UPDATE viatelecom.spr_bills SET value = ? WHERE id = ?";
     private static final String SQL_DELETE_BILL = "DELETE FROM viatelecom.spr_bills WHERE id = ?";
 
     Template template = new BillTemplate();

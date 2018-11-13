@@ -1,4 +1,4 @@
-package ua.gmail.sydorenko.web.commandFactory;
+package ua.gmail.sydorenko.web.command;
 
 public interface Path {
     String PAGE_INDEX = "/index.jsp";

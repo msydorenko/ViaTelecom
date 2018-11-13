@@ -1,7 +1,7 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.MySQLManager;
+import ua.gmail.sydorenko.database.MySQLManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
@@ -28,9 +28,8 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_CREATE_USER = "INSERT INTO viatelecom.users (login, password, first_name, last_name, " +
             "active_status, spr_bills_id, spt_addresses_id, spr_contacts_id, spr_roles_id) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE ";
-    private static final String SQL_UPDATE_USER = "UPDATE viatelecom.users SET login = ?, password = ?, first_name = ?, " +
-            "last_name = ?, active_status = ?, spr_bills_id, spr_addresses_id, spr_contacts_id, spr_roles_id " +
-            " WHERE id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE viatelecom.users SET login = ?, password = ?, last_name = ?, " +
+            "active_status = ? WHERE id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM viateelecom.users WHERE id = ?";
 
     private static final String SQL_LINK_CREATE_USER_ORDERS = "INSERT INTO viatelecom.user_orders (users_id, tariffs_id) " +
@@ -38,7 +37,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_LINK_READ_USER_ORDERS = "SELECT t.id, t.spr_services_id, t.name, t.price, t.description " +
             "FROM viatelecom.tariffs AS t JOIN viatelecom.user_orders AS link ON t.id = link.tariffs_id " +
             "AND link.users_id = ?";
-    private static final String SQL_LINK_DELETE_USER_ORDERS = "DELETE FROM viatelecom.user_orders WHERE users_id = ?";
+    private static final String SQL_LINK_DELETE_USER_ORDERS = "DELETE FROM viatelecom.user_orders WHERE users_id = ? AND tariffs_id = ?";
 
     private static final String SQL_GET_NEXT_AUTOINCREMENT = "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'viatelecom' AND TABLE_NAME = 'users'";
 
@@ -80,9 +79,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteTariffForUser(User user) throws DaoSystemException {
+    public void deleteTariffForUser(User user, int tariffId) throws DaoSystemException {
         try {
-            new TariffTemplate().executeQuery(manager, SQL_LINK_DELETE_USER_ORDERS, user.getId());
+            new TariffTemplate().executeQuery(manager, SQL_LINK_DELETE_USER_ORDERS, user.getId(), tariffId);
         } catch (DaoSystemException e) {
             LOG.error("Cannot delete link in table user_orders! ", e);
             throw new DaoSystemException("Cannot delete list in table user_orders! ", e);
@@ -128,9 +127,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(User user) throws DaoSystemException {
         try {
-            template.executeQuery(manager, SQL_UPDATE_USER, user.getLogin(), user.getPassword(), user.getFirst_name(),
-                    user.getLast_name(), user.isActive_status(), user.getBill(), user.getAddress(), user.getContact(),
-                    user.getRoleId());
+            template.executeQuery(manager, SQL_UPDATE_USER, user.getLogin(), user.getPassword(),
+                    user.getLast_name(), user.isActive_status(), user.getId());
         } catch (DaoSystemException e) {
             LOG.error("Cannot update user in table users! ", e);
             throw new DaoSystemException("Cannot update user in table users! ", e);

@@ -36,7 +36,7 @@
 </div>
 
 <c:if test="${not empty errorMessage}">
-    <div class="alert alert-danger" role="alert">${errorMessage}</div>
+    <div class="" >${errorMessage}</div>
 </c:if>
 <div>
     <c:if test="${not empty tariffList && tariffList != null}">

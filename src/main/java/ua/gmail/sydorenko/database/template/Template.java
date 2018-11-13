@@ -1,6 +1,6 @@
 package ua.gmail.sydorenko.database.template;
 
-import ua.gmail.sydorenko.MySQLManager;
+import ua.gmail.sydorenko.database.MySQLManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Entity;
 

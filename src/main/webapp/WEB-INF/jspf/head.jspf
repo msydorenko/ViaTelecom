@@ -1,19 +1,16 @@
-<%@ include file="/WEB-INF/jspf/directive.jspf" %>
-<%@ include file="/WEB-INF/jspf/taglib.jspf" %>
 <head>
-
     <title>
         ${title}
     </title>
-
-    <%--===========================================================================
-    If you define http-equiv attribute, set the content type and the charset the same
-    as you set them in a page directive.
-    ===========================================================================--%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/style.css"/>
     <%--===========================================================================
     Script for capcha
     ===========================================================================--%>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript" src="js/capcha.js"></script>
+    <%--===========================================================================
+    Script for login page
+    ===========================================================================--%>
+    <%--<script type="text/javascript" src="js/loginJs.js"/>--%>
 </head>

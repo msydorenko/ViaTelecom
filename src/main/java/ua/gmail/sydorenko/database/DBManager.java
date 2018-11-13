@@ -1,4 +1,4 @@
-package ua.gmail.sydorenko;
+package ua.gmail.sydorenko.database;
 
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 

@@ -17,6 +17,6 @@ public interface UserDao extends EntityDao<User> {
 
     List<Tariff> readTariffForUser(User user) throws DaoSystemException;
 
-    void deleteTariffForUser(User user) throws DaoSystemException;
+    void deleteTariffForUser(User user, int tariffId) throws DaoSystemException;
 
 }
