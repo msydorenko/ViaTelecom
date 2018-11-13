@@ -11,6 +11,7 @@ import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
 import java.util.Set;
 
 public class UserUnsubscribeTariffCommand implements Command {
@@ -28,11 +29,14 @@ public class UserUnsubscribeTariffCommand implements Command {
         LOG.trace("Obtain user from session: " + user);
 
         Set<Tariff> tariffs = user.getTariffs();
-        for (Tariff tariff : tariffs) {
-            if (tariff.getId() == tariffId) {
-                tariffs.remove(tariff);
+        Iterator<Tariff> iterator = tariffs.iterator();
+        while (iterator.hasNext()){
+            Tariff next = iterator.next();
+            if(next.getId() == tariffId){
+                iterator.remove();
             }
         }
+
         user.setTariffs(tariffs);
         LOG.trace("Refresh list of tariffs for user: " + user);
 
