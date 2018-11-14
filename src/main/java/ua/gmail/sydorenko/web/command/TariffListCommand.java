@@ -19,13 +19,13 @@ public class TariffListCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
-        LOG.debug("Command for list of tariffs starts");
+        LOG.debug("Command 'list of tariffs' starts");
         int serviceId = Integer.parseInt(request.getParameter("serviceId"));
         TariffDao tariffService = new TariffDaoImpl();
         List<Tariff> tariffList = ((TariffDaoImpl) tariffService).readByIdService(serviceId);
         HttpSession session = request.getSession(false);
         session.setAttribute("tariffList", tariffList);
-        LOG.debug("Command for list of tariffs finished");
+        LOG.debug("Command 'list of tariffs' finished");
 
         return Path.PAGE_MAIN;
     }

@@ -8,8 +8,6 @@ import ua.gmail.sydorenko.database.entity.User;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserTemplate extends Template<User> {
 
@@ -24,7 +22,7 @@ public class UserTemplate extends Template<User> {
                 user.setPassword(resultSet.getString(numberColumn++));
                 user.setFirst_name(resultSet.getString(numberColumn++));
                 user.setLast_name(resultSet.getString(numberColumn++));
-                user.setActive_status(resultSet.getBoolean(numberColumn++));
+                user.setBlocked(resultSet.getBoolean(numberColumn++));
                 user.setBill(new Bill(resultSet.getInt(numberColumn++)));
                 user.setAddress(new Address(resultSet.getInt(numberColumn++)));
                 user.setContact(new Contact(resultSet.getInt(numberColumn++)));

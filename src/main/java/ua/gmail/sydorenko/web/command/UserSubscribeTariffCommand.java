@@ -39,7 +39,7 @@ public class UserSubscribeTariffCommand implements Command {
         LOG.trace("Balance after added tariff: " + resultBalance);
         String errorMessage;
         if (resultBalance < 0) {
-            user.setActive_status(true);
+            user.setBlocked(true);
             userDao.update(user);
             errorMessage = "There is not enough money in the account to complete this operation! " +
                     "Please replenish your account and try again.";

@@ -45,4 +45,12 @@ public class Contact extends Entity {
         result = 37 * result + ((int) (phoneNumber ^ (phoneNumber >>> 32))) + email.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

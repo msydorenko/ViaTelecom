@@ -41,6 +41,7 @@ public class CommandFactory {
         commandList.put("locale", new I18NCommand());
         commandList.put("download", new DownloadCommand());
         commandList.put("recharge", new RechargeCommand());
+        commandList.put("usersList", new UsersListCommand());
 
 
         commandList.put("logout", new LogoutCommand());

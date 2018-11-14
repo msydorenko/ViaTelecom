@@ -16,9 +16,10 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
-    private static final String SQL_READ_ALL_USERS = "SELECT id, login, password, first_name, last_name, " +
+    private static final int ROLE_ID = 2;
+    private static final String SQL_READ_ALL_CLIENTS = "SELECT id, login, password, first_name, last_name, " +
             "active_status, spr_bills_id, spr_addresses_id, spr_contacts_id, spr_roles_id " +
-            "FROM viatelecom.users";
+            "FROM viatelecom.users WHERE spr_roles_id = " + ROLE_ID;
     private static final String SQL_READ_USER_BY_LOGIN = "SELECT id, login, password, first_name, last_name," +
             " active_status, spr_bills_id, spr_addresses_id, spr_contacts_id, spr_roles_id" +
             " FROM viatelecom.users WHERE login = ?";
@@ -92,7 +93,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> readAll() throws DaoSystemException {
         List<User> listUsers;
         try {
-            listUsers = template.executeAndReturn(manager, SQL_READ_ALL_USERS);
+            listUsers = template.executeAndReturn(manager, SQL_READ_ALL_CLIENTS);
         } catch (DaoSystemException e) {
             LOG.error("Cannot obtain list of users! ", e);
             throw new DaoSystemException("Cannot obtain list of users! ", e);
@@ -117,7 +118,7 @@ public class UserDaoImpl implements UserDao {
         int id = template.readNextAutoIncrement(manager, SQL_GET_NEXT_AUTOINCREMENT);
         try {
             template.executeQuery(manager, SQL_CREATE_USER, user.getLogin(), user.getPassword(), user.getFirst_name(),
-                    user.getLast_name(), user.isActive_status(), id, id, id, user.getRoleId());
+                    user.getLast_name(), user.isBlocked(), id, id, id, user.getRoleId());
         } catch (DaoSystemException e) {
             LOG.error("Cannot create user in table users! ", e);
             throw new DaoSystemException("Cannot create user in table users! ", e);
@@ -128,7 +129,7 @@ public class UserDaoImpl implements UserDao {
     public void update(User user) throws DaoSystemException {
         try {
             template.executeQuery(manager, SQL_UPDATE_USER, user.getLogin(), user.getPassword(),
-                    user.getLast_name(), user.isActive_status(), user.getId());
+                    user.getLast_name(), user.isBlocked(), user.getId());
         } catch (DaoSystemException e) {
             LOG.error("Cannot update user in table users! ", e);
             throw new DaoSystemException("Cannot update user in table users! ", e);

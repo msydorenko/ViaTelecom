@@ -10,7 +10,7 @@ public class User extends Entity {
     private String password;
     private String first_name;
     private String last_name;
-    private boolean active_status;
+    private boolean blocked;
     private Bill bill;
     private Address address;
     private Contact contact;
@@ -53,12 +53,12 @@ public class User extends Entity {
         this.last_name = last_name;
     }
 
-    public boolean isActive_status() {
-        return active_status;
+    public boolean isBlocked() {
+        return blocked;
     }
 
-    public void setActive_status(boolean active_status) {
-        this.active_status = active_status;
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     public Bill getBill() {

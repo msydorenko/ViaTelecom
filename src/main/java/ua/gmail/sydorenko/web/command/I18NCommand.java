@@ -16,6 +16,7 @@ public class I18NCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         LOG.debug("Command I18N starts");
+        String forward = null;
         String localeToSet = request.getParameter("i18n");
         String fmtLocale = "javax.servlet.jsp.jstl.fmt.locale";
         LOG.trace("Locale from request: " + localeToSet);
@@ -24,7 +25,22 @@ public class I18NCommand implements Command {
             Config.set(session, fmtLocale, localeToSet);
             session.setAttribute("defaultLocale", localeToSet);
         }
+        String page = request.getParameter("page");
+        switch (page) {
+            case "main": {
+                forward = Path.PAGE_MAIN;
+                break;
+            }
+            case "index": {
+                forward = Path.PAGE_INDEX;
+                break;
+            }
+            case "clients": {
+                forward = Path.PAGE_CLIENTS;
+                break;
+            }
+        }
         LOG.debug("Command I18 finished");
-        return Path.PAGE_MAIN;
+        return forward;
     }
 }

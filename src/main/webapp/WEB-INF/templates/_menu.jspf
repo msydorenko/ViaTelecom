@@ -23,7 +23,7 @@
             <div>
                 <c:choose>
                     <c:when test="${userRole.name eq 'admin'}">
-                        <form class="" method="post" action="viatelecom?command=userList">
+                        <form class="" method="post" action="viatelecom?command=usersList">
                             <button class="" type="submit">
                                 <fmt:message key="templates.menu.users"/>
                             </button>
