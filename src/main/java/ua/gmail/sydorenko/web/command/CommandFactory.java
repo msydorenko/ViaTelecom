@@ -42,6 +42,7 @@ public class CommandFactory {
         commandList.put("download", new DownloadCommand());
         commandList.put("recharge", new RechargeCommand());
         commandList.put("usersList", new UsersListCommand());
+        commandList.put("changeUserStatus", new ChangeUserStatusCommand());
 
 
         commandList.put("logout", new LogoutCommand());

@@ -31,7 +31,7 @@
                 <td>${user.bill.number}</td>
                 <td><c:choose>
                     <c:when test="${user.blocked}">
-                        <form class="" method="post" action="viatelecom?command=changeUserStatus">
+                        <form class="" method="post" action="viatelecom?command=changeUserStatus&action=unblock">
                             <input type="hidden" name="idUserForStatusChange" value="${user.id}"/>
                             <button class="" type="submit">
                                 <fmt:message key="admin.clients.table.block"/>
@@ -39,7 +39,7 @@
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <form class="" method="post" action="viatelecom?command=changeUserStatus">
+                        <form class="" method="post" action="viatelecom?command=changeUserStatus&action=block">
                             <input type="hidden" name="idUserForStatusChange" value="${user.id}"/>
                             <button class="" type="submit">
                                 <fmt:message key="admin.clients.table.active"/>

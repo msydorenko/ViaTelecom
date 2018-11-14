@@ -8,4 +8,5 @@ public interface Path {
     String PAGE_CLIENTS = "/WEB-INF/jsp/clients.jsp";
 
     String COMMAND_MAIN = "viatelecom?command=main";
+    String COMMAND_USERSLIST = "viatelecom?command=usersList";
 }

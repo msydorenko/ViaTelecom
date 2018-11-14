@@ -42,6 +42,12 @@
         <url-pattern>/WEB-INF/jsp/*</url-pattern>
         <servlet-name>Controller</servlet-name>
     </filter-mapping>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
 
     <resource-ref>
         <description>DB Connection</description>
