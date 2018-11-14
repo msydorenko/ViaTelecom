@@ -32,7 +32,7 @@
                 <td><c:choose>
                     <c:when test="${user.blocked}">
                         <form class="" method="post" action="viatelecom?command=changeUserStatus&action=unblock">
-                            <input type="hidden" name="idUserForStatusChange" value="${user.id}"/>
+                            <input type="hidden" name="idUserForChange" value="${user.id}"/>
                             <button class="" type="submit">
                                 <fmt:message key="admin.clients.table.block"/>
                             </button>
@@ -40,7 +40,7 @@
                     </c:when>
                     <c:otherwise>
                         <form class="" method="post" action="viatelecom?command=changeUserStatus&action=block">
-                            <input type="hidden" name="idUserForStatusChange" value="${user.id}"/>
+                            <input type="hidden" name="idUserForChange" value="${user.id}"/>
                             <button class="" type="submit">
                                 <fmt:message key="admin.clients.table.active"/>
                             </button>
@@ -49,7 +49,7 @@
                 </c:choose></td>
                 <td>
                     <form class="" method="post" action="viatelecom?command=editUser">
-                        <input type="hidden" name="idUserForStatusChange" value="${user.id}"/>
+                        <input type="hidden" name="idUserForChange" value="${user.id}"/>
                         <button class="" type="submit">
                             <fmt:message key="admin.clients.table.user.edit"/>
                         </button>
@@ -57,7 +57,7 @@
                 </td>
                 <td>
                     <form class="" method="post" action="viatelecom?command=deleteUser">
-                        <input type="hidden" name="idUserForStatusChange" value="${user.id}"/>
+                        <input type="hidden" name="idUserForChange" value="${user.id}"/>
                         <button class="" type="submit">
                             <fmt:message key="admin.clients.table.user.delete"/>
                         </button>

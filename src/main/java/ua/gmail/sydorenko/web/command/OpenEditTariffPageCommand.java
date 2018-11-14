@@ -26,6 +26,6 @@ public class OpenEditTariffPageCommand implements Command {
         request.setAttribute("tariffForUpdate", tariff);
         LOG.trace("Tariff for update --> " + tariffId);
         LOG.debug("Command 'open page for update' end");
-        return Path.PAGE_OPEN_EDIT_TARIFF;
+        return Path.PAGE_EDIT_TARIFF;
     }
 }

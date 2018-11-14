@@ -21,9 +21,9 @@ public class ChangeUserStatusCommand implements Command {
         LOG.debug("Command 'change user status' starts");
         UserDao userDao = new UserDaoImpl();
 
-        int idUserForStatusChange = Integer.parseInt(request.getParameter("idUserForStatusChange"));
+        int idUserForChange = Integer.parseInt(request.getParameter("idUserForChange"));
         String parameter = request.getParameter("action");
-        User user = userDao.readById(idUserForStatusChange).get(0);
+        User user = userDao.readById(idUserForChange).get(0);
         switch (parameter) {
             case "unblock": {
                 user.setBlocked(false);
