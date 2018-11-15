@@ -12,5 +12,5 @@ public interface Path {
 */
 
     String COMMAND_MAIN = "viatelecom?command=main";
-    String COMMAND_USERSLIST = "viatelecom?command=usersList";
+    String COMMAND_CLIENTS_LIST = "viatelecom?command=usersList";
 }

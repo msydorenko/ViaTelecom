@@ -19,8 +19,12 @@ public class Service extends Entity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Service contact = (Service) o;
         return Objects.equals(name, contact.name);
     }
@@ -29,5 +33,12 @@ public class Service extends Entity {
     public int hashCode() {
         int result = 17;
         return 37 * result + (name.hashCode());
+    }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

@@ -46,18 +46,21 @@ public class Tariff extends Entity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Tariff)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof Tariff)) {
+            return false;
+        }
         Tariff tariff = (Tariff) o;
-        return Objects.equals(name, tariff.name)&&
+        return Objects.equals(name, tariff.name) &&
                 Objects.equals(price, tariff.price);
     }
 
     @Override
     public int hashCode() {
         int result = 17;
-        result = 37 * result + name.hashCode() + price;
-        return result;
+        return 37 * result + name.hashCode() + price;
     }
 
     @Override

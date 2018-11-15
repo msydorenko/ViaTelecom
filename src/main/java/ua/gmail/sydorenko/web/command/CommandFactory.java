@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CommandFactory {
     private static CommandFactory instance;
-    private static final Logger log = Logger.getLogger(CommandFactory.class);
+    private static final Logger LOG = Logger.getLogger(CommandFactory.class);
     private static Map<String, Command> commandList = new HashMap<>();
 
     private CommandFactory() {
@@ -44,6 +44,7 @@ public class CommandFactory {
         commandList.put("usersList", new UsersListCommand());
         commandList.put("changeUserStatus", new ChangeUserStatusCommand());
         commandList.put("clientData", new ClientDataCommand());
+        commandList.put("createOrUpdate", new CreateOrUpdateClientCommand());
 
 
         commandList.put("logout", new LogoutCommand());

@@ -2,6 +2,9 @@ package ua.gmail.sydorenko.database.entity;
 
 import java.util.Objects;
 
+/**
+ * @author M.Sydorenko
+ */
 public class Bill extends Entity {
     private static final long serialVersionUID = 1909333L;
     private String number;
@@ -41,8 +44,7 @@ public class Bill extends Entity {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 37 * result + number.hashCode();
-        return result;
+        return 37 * result + number.hashCode();
     }
 
     @Override

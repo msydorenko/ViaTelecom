@@ -7,7 +7,6 @@ import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author M.Sydorenko
@@ -25,20 +24,18 @@ public class ChangeUserStatusCommand implements Command {
         String parameter = request.getParameter("action");
         User user = userDao.readById(idUserForChange).get(0);
         switch (parameter) {
-            case "unblock": {
+            case "unblock":
                 user.setBlocked(false);
                 break;
-            }
-            case "block": {
+            case "block":
                 user.setBlocked(true);
                 break;
-            }
         }
         LOG.trace("Obtain user from table and change status " + user);
         userDao.update(user);
         LOG.trace("Update user in table");
         LOG.debug("Command 'change user status' finished");
 
-        return Path.COMMAND_USERSLIST;
+        return Path.COMMAND_CLIENTS_LIST;
     }
 }

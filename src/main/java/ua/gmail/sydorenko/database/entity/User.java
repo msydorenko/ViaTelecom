@@ -4,17 +4,20 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * @author M.Sydorenko
+ */
 public class User extends Entity {
-    private static final Long serialVersionUID = 482045L;
+    private static final long serialVersionUID = 7233991199887801117L;
     private String login;
     private String password;
     private String first_name;
     private String last_name;
-    private Boolean blocked;
+    private boolean blocked;
     private Bill bill;
     private Address address;
     private Contact contact;
-    private Integer roleId;
+    private int roleId;
     private Set<Tariff> tariffs;
 
     public User() {

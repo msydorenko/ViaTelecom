@@ -2,8 +2,11 @@ package ua.gmail.sydorenko.database.entity;
 
 import java.util.Objects;
 
+/**
+ * @author M.Sydorenko
+ */
 public class Contact extends Entity {
-    private static final long serialVersionUID = 94092L;
+    private static final long serialVersionUID = 6843109398583840887L;
     private long phoneNumber;
     private String email;
 
@@ -42,8 +45,7 @@ public class Contact extends Entity {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 37 * result + ((int) (phoneNumber ^ (phoneNumber >>> 32))) + email.hashCode();
-        return result;
+        return 37 * result + ((int) (phoneNumber ^ (phoneNumber >>> 32))) + email.hashCode();
     }
 
     @Override

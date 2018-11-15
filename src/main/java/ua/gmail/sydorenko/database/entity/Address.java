@@ -2,8 +2,11 @@ package ua.gmail.sydorenko.database.entity;
 
 import java.util.Objects;
 
+/**
+ * @author M.Sydorenko
+ */
 public class Address extends Entity {
-    private static final long serialVersionUID = 8204856L;
+    private static final long serialVersionUID = -3526149612865998479L;
     private String country;
     private String city;
     private String street;
@@ -72,9 +75,8 @@ public class Address extends Entity {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 37 * result + country.hashCode() + city.hashCode() + street.hashCode()
+        return 37 * result + country.hashCode() + city.hashCode() + street.hashCode()
                 + house + flat;
-        return result;
     }
 
     @Override
