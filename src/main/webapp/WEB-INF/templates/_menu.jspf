@@ -52,7 +52,7 @@
                 <c:otherwise>
                     <form class="" method="post" action="../../login.jsp">
                         <button class="" type="submit">
-                            <fmt:message key="templates.menu.enter"/>
+                            <fmt:message key="templates.menu.cabinet"/>
                         </button>
                     </form>
                 </c:otherwise>

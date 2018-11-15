@@ -48,7 +48,7 @@
                     </c:otherwise>
                 </c:choose></td>
                 <td>
-                    <form class="" method="post" action="viatelecom?command=editUser">
+                    <form class="" method="post" action="viatelecom?command=clientData">
                         <input type="hidden" name="idUserForChange" value="${user.id}"/>
                         <button class="" type="submit">
                             <fmt:message key="admin.clients.table.user.edit"/>
@@ -68,7 +68,7 @@
     </c:if>
 </div>
 <div>
-    <form class="" method="post" action="viatelecom?command=addUser">
+    <form class="" method="post" action="viatelecom?command=clientData">
         <button class="" type="submit">
             <fmt:message key="admin.button.user.add"/>
         </button>

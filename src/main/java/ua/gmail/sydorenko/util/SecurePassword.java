@@ -9,11 +9,9 @@ import java.security.spec.InvalidKeySpecException;
 
 import org.apache.commons.codec.binary.Base64;
 
-/*
-String getSaltedHash(String password)
-boolean checkPassword(String password, String stored)
+/**
+ * @author M.Sydorenko
  */
-
 public class SecurePassword {
     private static final int iterations = 20 * 1000;
     private static final int saltLen = 32;

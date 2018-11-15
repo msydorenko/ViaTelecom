@@ -2,6 +2,9 @@ package ua.gmail.sydorenko.database.entity;
 
 import java.util.Objects;
 
+/**
+ * @author M.Sydorenko
+ */
 public class Tariff extends Entity {
     private static final long serialVersionUID = 482045L;
     private int spr_service_id;

@@ -2,6 +2,9 @@ package ua.gmail.sydorenko.database.entity;
 
 import java.util.Objects;
 
+/**
+ * @author M.Sydorenko
+ */
 public class Service extends Entity {
     private static final long serialVersionUID = 1295689L;
     private String name;
@@ -25,7 +28,6 @@ public class Service extends Entity {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 37 * result + (name.hashCode());
-        return result;
+        return 37 * result + (name.hashCode());
     }
 }

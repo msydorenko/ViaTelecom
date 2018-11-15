@@ -5,16 +5,16 @@ import java.util.Objects;
 import java.util.Set;
 
 public class User extends Entity {
-    private static final long serialVersionUID = 482045L;
+    private static final Long serialVersionUID = 482045L;
     private String login;
     private String password;
     private String first_name;
     private String last_name;
-    private boolean blocked;
+    private Boolean blocked;
     private Bill bill;
     private Address address;
     private Contact contact;
-    private int roleId;
+    private Integer roleId;
     private Set<Tariff> tariffs;
 
     public User() {
@@ -103,8 +103,12 @@ public class User extends Entity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof User)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof User)) {
+            return false;
+        }
         User user = (User) o;
         return Objects.equals(login, user.login);
     }
@@ -112,8 +116,7 @@ public class User extends Entity {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 37*result + login.hashCode();
-        return result;
+        return 37 * result + login.hashCode();
     }
 
     @Override

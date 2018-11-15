@@ -78,7 +78,7 @@ public abstract class Template<T extends Entity> {
         return list;
     }
 
-    public void setParamInQuery(PreparedStatement ps, Object... values) throws SQLException {
+    private void setParamInQuery(PreparedStatement ps, Object... values) throws SQLException {
         for (int i = 0; i < values.length; i++) {
             ps.setObject(i + 1, values[i]);
         }
@@ -92,7 +92,7 @@ public abstract class Template<T extends Entity> {
      * @return next automatic id mysql
      */
     public int readNextAutoIncrement(MySQLManager manager, String query) throws DaoSystemException {
-        int nextId = -1;
+        Integer nextId = -1;
         Connection connection = manager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {

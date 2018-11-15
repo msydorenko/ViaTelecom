@@ -36,44 +36,31 @@
 </div>
 
 <c:if test="${not empty errorMessage}">
-    <div class="" >${errorMessage}</div>
+    <div class="">${errorMessage}</div>
 </c:if>
 <div>
     <c:if test="${not empty tariffList && tariffList != null}">
         <table>
             <tr>
                 <th>
-                    <form method="post" action="viatelecom?command=sort">
-                        <input type="hidden" name="value" value="az">
-                        <button type="submit">
-                            <fmt:message key="table.tariff.az"/>
-                        </button>
-                    </form>
-                    <form method="post" action="viatelecom?command=sort">
-                        <input type="hidden" name="value" value="za">
-                        <button type="submit">
-                            <fmt:message key="table.tariff.za"/>
-                        </button>
-                    </form>
                     <fmt:message key="table.tariff.name"/>
-
+                    <form method="post" action="viatelecom?command=sort">
+                        <select onchange="submit()" name="value">
+                            <option>sort</option>
+                            <option value="az"><fmt:message key="table.tariff.az"/></option>
+                            <option value="za"><fmt:message key="table.tariff.za"/></option>
+                        </select>
+                    </form>
                 </th>
                 <th>
-                    <form method="post" action="viatelecom?command=sort">
-                        <input type="hidden" name="value" value="min">
-                        <button type="submit">
-                            <fmt:message key="table.tariff.min"/>
-                        </button>
-                    </form>
-                    <form method="post" action="viatelecom?command=sort">
-                        <input type="hidden" name="value" value="max">
-                        <button type="submit">
-                            <fmt:message key="table.tariff.max"/>
-                        </button>
-                    </form>
-
-
                     <fmt:message key="table.tariff.price"/>
+                    <form method="post" action="viatelecom?command=sort">
+                        <select onchange="submit()" name="value">
+                            <option>sort</option>
+                            <option value="min"><fmt:message key="table.tariff.min"/></option>
+                            <option value="max"><fmt:message key="table.tariff.max"/></option>
+                        </select>
+                    </form>
                 </th>
                 <th><fmt:message key="table.tariff.description"/></th>
                 <th>

@@ -1,5 +1,8 @@
 package ua.gmail.sydorenko.database.entity;
 
+/**
+ * @author M.Sydorenko
+ */
 public enum Role {
     ADMIN, CLIENT;
 

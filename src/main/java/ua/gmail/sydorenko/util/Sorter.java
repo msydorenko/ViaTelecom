@@ -4,6 +4,9 @@ import ua.gmail.sydorenko.database.entity.Tariff;
 
 import java.util.Comparator;
 
+/**
+ * @author M.Sydorenko
+ */
 public class Sorter {
     public static final Comparator<Tariff> SORT_BY_NAME_AZ = Comparator.comparing(Tariff::getName);
 

@@ -43,7 +43,7 @@ public class CommandFactory {
         commandList.put("recharge", new RechargeCommand());
         commandList.put("usersList", new UsersListCommand());
         commandList.put("changeUserStatus", new ChangeUserStatusCommand());
-        commandList.put("editUser", new EditUserCommand());
+        commandList.put("clientData", new ClientDataCommand());
 
 
         commandList.put("logout", new LogoutCommand());

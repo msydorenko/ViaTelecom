@@ -7,14 +7,15 @@ import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EditUserCommand implements Command {
+public class ClientDataCommand implements Command {
     private static final long serialVersionUID = -7092103951978477774L;
-    private static final Logger LOG = Logger.getLogger(EditUserCommand.class);
+    private static final Logger LOG = Logger.getLogger(ClientDataCommand.class);
 
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
-        LOG.debug("Command 'edit user' starts");
+        LOG.debug("Command 'client data' starts");
+        if(request.getParameter("idUserForChange") != null && !request.getParameter("idUserForChange").isEmpty()){
         UserDao userDao = new UserDaoImpl();
         BillDao billDao = new BillDaoImpl();
         AddressDao addressDao = new AddressDaoImpl();
@@ -27,8 +28,9 @@ public class EditUserCommand implements Command {
         user.setContact(contactDao.readById(user.getContact().getId()).get(0));
         LOG.trace("Obtain user for change " + user);
 
-        request.setAttribute("userForUpdate", user);
-        LOG.debug("Command 'edit user' finished");
-        return Path.PAGE_EDIT_CLIENT;
+        request.setAttribute("userForUpdate", user);}
+
+        LOG.debug("Command 'client data' finished");
+        return Path.PAGE_CLIENT_DATA;
     }
 }

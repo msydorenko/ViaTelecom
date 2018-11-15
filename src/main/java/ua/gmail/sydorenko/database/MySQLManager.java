@@ -11,6 +11,9 @@ import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * @author M.Sydorenko
+ */
 public class MySQLManager implements DBManager {
     private static final Logger LOG = Logger.getLogger(MySQLManager.class.getName());
     private static MySQLManager instance;

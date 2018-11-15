@@ -2,6 +2,9 @@ package ua.gmail.sydorenko.database.entity;
 
 import java.io.Serializable;
 
+/**
+ * @author M.Sydorenko
+ */
 public abstract class Entity implements Serializable {
     private static final long serialVersionUID = 9378269L;
     private int id;

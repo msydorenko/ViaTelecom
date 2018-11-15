@@ -61,7 +61,6 @@ public class LoginCommand implements Command {
         user.setAddress(address);
         user.setContact(contact);
 
-//        if (user == null || !user.getPassword().equals(password)) {
         if (user == null || !SecurePassword.check(password, user.getPassword())) {
             errorMessage = "Incorrect data. Please, check it!";
             request.setAttribute("errorMessage", errorMessage);

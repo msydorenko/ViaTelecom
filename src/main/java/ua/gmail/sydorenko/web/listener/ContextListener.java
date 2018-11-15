@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 
 public class ContextListener implements ServletContextListener {
-    Logger LOG = Logger.getLogger(ContextListener.class.getName());
+    private final static Logger LOG = Logger.getLogger(ContextListener.class.getName());
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
@@ -33,7 +33,7 @@ public class ContextListener implements ServletContextListener {
         try {
             PropertyConfigurator.configure(servletContext.getRealPath("log4j.properties"));
         } catch (Exception e) {
-            LOG.warn("Properties for log4j doesn't load", e);
+            LOG.warn("Properties for log4j don't load", e);
         }
         LOG.trace("Log4J initialization finished");
     }
@@ -44,12 +44,12 @@ public class ContextListener implements ServletContextListener {
     private void initI18N(ServletContext servletContext) {
         LOG.trace("I18N initialisation start");
         String locales = servletContext.getInitParameter("locales");
-        if(locales == null || locales.isEmpty()){
+        if (locales == null || locales.isEmpty()) {
             LOG.warn("'locales' init parameter is empty, the default encoding will be used");
-        }else {
+        } else {
             List<String> localeList = new ArrayList<>();
             StringTokenizer st = new StringTokenizer(locales);
-            while (st.hasMoreTokens()){
+            while (st.hasMoreTokens()) {
                 String locale = st.nextToken();
                 localeList.add(locale);
             }
@@ -58,6 +58,4 @@ public class ContextListener implements ServletContextListener {
         }
         LOG.debug("I18N subsystem initialization finished");
     }
-
-
 }
