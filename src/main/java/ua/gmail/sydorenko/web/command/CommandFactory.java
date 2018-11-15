@@ -45,6 +45,7 @@ public class CommandFactory {
         commandList.put("changeUserStatus", new ChangeUserStatusCommand());
         commandList.put("clientData", new ClientDataCommand());
         commandList.put("createOrUpdate", new CreateOrUpdateClientCommand());
+        commandList.put("deleteUser", new DeleteClientCommand());
 
 
         commandList.put("logout", new LogoutCommand());

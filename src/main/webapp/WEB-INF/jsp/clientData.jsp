@@ -10,7 +10,9 @@
 <c:if test="${not empty errorMessage}">
     <div class="">${errorMessage}</div>
 </c:if>
-<form class="" action="viatelecom?command=createOrUpdate">
+<form class="" method="post" action="viatelecom">
+    <input type="hidden" name="command" value="createOrUpdate"/>
+    <input type="hidden" name="uid" value="${Math.random()}"/>
     <c:if test="${userForUpdate != null}">
         <input type="hidden" name="idUserForUpdate" value="${userForUpdate.id}"/>
     </c:if>
@@ -136,7 +138,7 @@
         </div>
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.email"/></label>
-            <input type="email" name="email" placeholder="@gmail.com" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            <input type="email" name="email" placeholder="@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                    autofocus required>
         </div>
     </div>

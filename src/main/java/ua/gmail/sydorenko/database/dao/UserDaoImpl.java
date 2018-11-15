@@ -27,11 +27,11 @@ public class UserDaoImpl implements UserDao {
             " active_status, spr_bills_id, spr_addresses_id, spr_contacts_id, spr_roles_id" +
             " FROM viatelecom.users WHERE id = ?";
     private static final String SQL_CREATE_USER = "INSERT INTO viatelecom.users (login, password, first_name, last_name, " +
-            "active_status, spr_bills_id, spt_addresses_id, spr_contacts_id, spr_roles_id) " +
+            "active_status, spr_bills_id, spr_addresses_id, spr_contacts_id, spr_roles_id) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE_USER = "UPDATE viatelecom.users SET login = ?, password = ?, last_name = ?, " +
             "active_status = ? WHERE id = ?";
-    private static final String SQL_DELETE_USER = "DELETE FROM viateelecom.users WHERE id = ?";
+    private static final String SQL_DELETE_USER = "DELETE FROM viatelecom.users WHERE id = ?";
 
     private static final String SQL_LINK_CREATE_USER_ORDERS = "INSERT INTO viatelecom.user_orders (users_id, tariffs_id) " +
             "VALUE (?, ?)";

@@ -1,5 +1,6 @@
 package ua.gmail.sydorenko.web.command;
 
+import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
@@ -10,6 +11,7 @@ import ua.gmail.sydorenko.database.entity.User;
 import ua.gmail.sydorenko.util.SecurePassword;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author M.Sydorenko
@@ -22,6 +24,17 @@ public class CreateOrUpdateClientCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'create or update client' starts");
+        String forward;
+        HttpSession session = request.getSession(false);
+        String uid = request.getParameter("uid");
+        LOG.trace("Request parameter: " + uid);
+
+        if (!uid.equals(session.getAttribute("uid"))) {
+            session.setAttribute("uid", uid);
+            LOG.trace("Set uid in the session " + uid);
+        } else {
+            forward = Path.PAGE_ERROR;
+        }
         UserDao userDao = new UserDaoImpl();
         BillDao billDao = new BillDaoImpl();
         AddressDao addressDao = new AddressDaoImpl();
@@ -65,8 +78,8 @@ public class CreateOrUpdateClientCommand implements Command {
             billDao.create(bill);
             userDao.create(user);
         }
-
+        forward = Path.COMMAND_CLIENTS_LIST;
         LOG.debug("Command 'create or update client' finished");
-        return Path.COMMAND_CLIENTS_LIST;
+        return forward;
     }
 }

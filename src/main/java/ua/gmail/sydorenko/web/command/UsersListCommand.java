@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author M.Sydorenko
+ */
 public class UsersListCommand implements Command {
     private static final long serialVersionUID = 8379728542243211585L;
     private static final Logger LOG = Logger.getLogger(UsersListCommand.class);
-
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {

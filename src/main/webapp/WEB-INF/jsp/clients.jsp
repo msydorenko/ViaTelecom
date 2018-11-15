@@ -26,54 +26,62 @@
                 <th><fmt:message key="admin.clients.table.delete"/></th>
             </tr>
             <c:forEach var="user" items="${completeUser}">
-                <td>${user.first_name}</td>
-                <td>${user.last_name}</td>
-                <td>${user.bill.number}</td>
-                <td><c:choose>
-                    <c:when test="${user.blocked}">
-                        <form class="" method="post" action="viatelecom?command=changeUserStatus&action=unblock">
+                <tr>
+                    <td>${user.first_name}</td>
+                    <td>${user.last_name}</td>
+                    <td>${user.bill.number}</td>
+                    <td><c:choose>
+                        <c:when test="${user.blocked}">
+                            <form class="" method="post" action="viatelecom">
+                                <input type="hidden" name="command" value="changeUserStatus"/>
+                                <input type="hidden" name="action" value="unblock"/>
+                                <input type="hidden" name="idUserForChange" value="${user.id}"/>
+                                <button class="" type="submit">
+                                    <fmt:message key="admin.clients.table.block"/>
+                                </button>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form class="" method="post" action="viatelecom">
+                                <input type="hidden" name="command" value="changeUserStatus"/>
+                                <input type="hidden" name="action" value="block"/>
+                                <input type="hidden" name="idUserForChange" value="${user.id}"/>
+                                <button class="" type="submit">
+                                    <fmt:message key="admin.clients.table.active"/>
+                                </button>
+                            </form>
+                        </c:otherwise>
+                    </c:choose></td>
+                    <td>
+                        <form class="" method="post" action="viatelecom">
+                            <input type="hidden" name="command" value="clientData"/>
                             <input type="hidden" name="idUserForChange" value="${user.id}"/>
                             <button class="" type="submit">
-                                <fmt:message key="admin.clients.table.block"/>
+                                <fmt:message key="admin.clients.table.user.edit"/>
                             </button>
                         </form>
-                    </c:when>
-                    <c:otherwise>
-                        <form class="" method="post" action="viatelecom?command=changeUserStatus&action=block">
+                    </td>
+                    <td>
+                        <form class="" method="post" action="viatelecom">
+                            <input type="hidden" name="command" value="deleteUser"/>
                             <input type="hidden" name="idUserForChange" value="${user.id}"/>
                             <button class="" type="submit">
-                                <fmt:message key="admin.clients.table.active"/>
+                                <fmt:message key="admin.clients.table.user.delete"/>
                             </button>
                         </form>
-                    </c:otherwise>
-                </c:choose></td>
-                <td>
-                    <form class="" method="post" action="viatelecom?command=clientData">
-                        <input type="hidden" name="idUserForChange" value="${user.id}"/>
-                        <button class="" type="submit">
-                            <fmt:message key="admin.clients.table.user.edit"/>
-                        </button>
-                    </form>
-                </td>
-                <td>
-                    <form class="" method="post" action="viatelecom?command=deleteUser">
-                        <input type="hidden" name="idUserForChange" value="${user.id}"/>
-                        <button class="" type="submit">
-                            <fmt:message key="admin.clients.table.user.delete"/>
-                        </button>
-                    </form>
-                </td>
+                    </td>
+                </tr>
             </c:forEach>
         </table>
     </c:if>
 </div>
 <div>
-    <form class="" method="post" action="viatelecom?command=clientData">
+    <form class="" method="post" action="viatelecom">
+        <input type="hidden" name="command" value="clientData"/>
         <button class="" type="submit">
             <fmt:message key="admin.button.user.add"/>
         </button>
     </form>
 </div>
-
 </body>
 </html>
