@@ -145,6 +145,7 @@
 <c:if test="${userRole.name eq 'admin'}">
     <div>
         <form action="viatelecom" method="post">
+            <input type="hidden" name="uid" value="${Math.random()}"/>
             <input type="hidden" name="command" value="addTariff"/>
             <select name="service">
                 <c:forEach var="service" items="${serviceList}">

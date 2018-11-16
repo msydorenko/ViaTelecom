@@ -1,6 +1,5 @@
 package ua.gmail.sydorenko.web.command;
 
-import jdk.management.resource.internal.inst.FileOutputStreamRMHooks;
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
@@ -29,43 +28,23 @@ public class CreateOrUpdateClientCommand implements Command {
         String uid = request.getParameter("uid");
         LOG.trace("Request parameter: " + uid);
 
-        if (!uid.equals(session.getAttribute("uid"))) {
+        if (session != null && !uid.equals(session.getAttribute("uid"))) {
             session.setAttribute("uid", uid);
-            LOG.trace("Set uid in the session " + uid);
+            LOG.trace("Set uid in the session from 'create or update' page" + uid);
+            forward = Path.COMMAND_CLIENTS_LIST;
         } else {
-            forward = Path.PAGE_ERROR;
+            LOG.warn("Resubmit form");
+            return Path.PAGE_ERROR;
         }
         UserDao userDao = new UserDaoImpl();
         BillDao billDao = new BillDaoImpl();
         AddressDao addressDao = new AddressDaoImpl();
         ContactDao contactDao = new ContactDaoImpl();
 
-        Address address = new Address();
-        address.setCountry(request.getParameter("country"));
-        address.setCity(request.getParameter("city"));
-        address.setStreet(request.getParameter("street"));
-        address.setHouse(Integer.parseInt(request.getParameter("house")));
-        address.setFlat(Integer.parseInt(request.getParameter("flat")));
-        LOG.trace("Create address: " + address);
-
-        Contact contact = new Contact();
-        contact.setPhoneNumber(Long.parseLong(request.getParameter("phone")));
-        contact.setEmail(request.getParameter("email"));
-        LOG.trace("Create contact: " + contact);
-
-        Bill bill = new Bill();
-        bill.setNumber(request.getParameter("bill"));
-        bill.setValue(Integer.parseInt(request.getParameter("balance")));
-        LOG.trace("Create bill: " + bill);
-
-        User user = new User();
-        user.setLogin(request.getParameter("login"));
-        String password = SecurePassword.getSaltedHash(request.getParameter("password"));
-        user.setPassword(password);
-        user.setFirst_name(request.getParameter("fname"));
-        user.setLast_name(request.getParameter("lname"));
-        user.setRoleId(ID_ROLE_CLIENT);
-        LOG.trace("Create user: " + user);
+        Address address = createAddress(request);
+        Contact contact = createContact(request);
+        Bill bill = createBill(request);
+        User user = createUser(request);
 
         if ((request.getParameter("idUserForUpdate") != null) && (!request.getParameter("idUserForUpdate").isEmpty())) {
             addressDao.update(address);
@@ -78,8 +57,46 @@ public class CreateOrUpdateClientCommand implements Command {
             billDao.create(bill);
             userDao.create(user);
         }
-        forward = Path.COMMAND_CLIENTS_LIST;
         LOG.debug("Command 'create or update client' finished");
         return forward;
+    }
+
+    private User createUser(HttpServletRequest request) {
+        User user = new User();
+        user.setLogin(request.getParameter("login"));
+        String password = SecurePassword.getSaltedHash(request.getParameter("password"));
+        user.setPassword(password);
+        user.setFirst_name(request.getParameter("fname"));
+        user.setLast_name(request.getParameter("lname"));
+        user.setRoleId(ID_ROLE_CLIENT);
+        LOG.trace("Create user: " + user);
+        return user;
+    }
+
+    private Bill createBill(HttpServletRequest request) {
+        Bill bill = new Bill();
+        bill.setNumber(request.getParameter("bill"));
+        bill.setValue(Integer.parseInt(request.getParameter("balance")));
+        LOG.trace("Create bill: " + bill);
+        return bill;
+    }
+
+    private Contact createContact(HttpServletRequest request) {
+        Contact contact = new Contact();
+        contact.setPhoneNumber(Long.parseLong(request.getParameter("phone")));
+        contact.setEmail(request.getParameter("email"));
+        LOG.trace("Create contact: " + contact);
+        return contact;
+    }
+
+    private Address createAddress(HttpServletRequest request) {
+        Address address = new Address();
+        address.setCountry(request.getParameter("country"));
+        address.setCity(request.getParameter("city"));
+        address.setStreet(request.getParameter("street"));
+        address.setHouse(Integer.parseInt(request.getParameter("house")));
+        address.setFlat(Integer.parseInt(request.getParameter("flat")));
+        LOG.trace("Create address: " + address);
+        return address;
     }
 }

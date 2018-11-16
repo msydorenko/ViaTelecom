@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-    <a href="/WEB-INF/jsp/main.jsp"><fmt:message key="error.forward.main"/></a>
+    <a href="viatelecom?command=main"><fmt:message key="error.forward.main"/></a>
 </div>
 <div>
     <img src="images/error.jpg" <%--width="100%"--%> height="100%" alt="Error">

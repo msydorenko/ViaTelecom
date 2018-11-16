@@ -7,6 +7,7 @@ import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author M.Sydorenko
@@ -18,6 +19,19 @@ public class AddTariffCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'add tariff' starts");
+        String forward;
+        HttpSession session = request.getSession(false);
+        String uid = request.getParameter("uid");
+        LOG.trace("Request parameter uid: " + uid);
+
+        if (!uid.equals(session.getAttribute("uid"))) {
+            session.setAttribute("uid", uid);
+            LOG.trace("Set uid in the session from 'add tariff' command " + uid);
+            forward = Path.COMMAND_MAIN;
+        } else {
+            LOG.warn("Resubmit form");
+            return Path.PAGE_ERROR;
+        }
         Tariff tariff = new Tariff();
         tariff.setSpr_service_id(Integer.parseInt(request.getParameter("service")));
         tariff.setName(request.getParameter("name"));
@@ -29,6 +43,6 @@ public class AddTariffCommand implements Command {
         service.create(tariff);
         LOG.debug("Command 'add tariff' was successfully finished");
 
-        return Path.COMMAND_MAIN;
+        return forward;
     }
 }
