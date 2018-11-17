@@ -109,6 +109,7 @@
                                 <c:choose>
                                     <c:when test="${count==0}">
                                         <form class="" method="post" action="viatelecom?command=userSubscribeTariff">
+                                            <input type="hidden" name="uid" value="${Math.random()}"/>
                                             <input type="hidden" name="tariffId" value="${tariff.id}"/>
                                             <button class="" type="submit">
                                                 <fmt:message key="client.button.addTariff"/>

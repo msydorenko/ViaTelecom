@@ -1,4 +1,3 @@
-
 <div class="block navigation clearfix">
     <nav class="">
         <c:if test="${not empty sessionScope.user}">
@@ -31,7 +30,9 @@
                     </c:when>
                     <c:otherwise>
                         <form class="" method="post" action="viatelecom?command=recharge">
-                            <input type="number" name="newBalance" placeholder="<fmt:message key="menu.deposit.uah"/>" min = 0 max="5000" required/>
+                            <input type="hidden" name="uid" value="${Math.random()}"/>
+                            <input type="number" name="newBalance" placeholder="<fmt:message key="menu.deposit.uah"/>"
+                                   min=0 max="5000" required/>
                             <button class="" type="submit">
                                 <fmt:message key="templates.menu.client.deposit"/>
                             </button>

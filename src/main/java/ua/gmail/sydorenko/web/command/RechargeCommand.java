@@ -20,7 +20,19 @@ public class RechargeCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'recharge' starts");
+        String forward;
         HttpSession session = request.getSession(false);
+        String uid = request.getParameter("uid");
+        LOG.trace("Request parameter in 'recharge' command: " + uid);
+
+        if (session != null && !uid.equals(session.getAttribute("uid"))) {
+            session.setAttribute("uid", uid);
+            LOG.trace("Set uid in the session in 'recharge' command" + uid);
+            forward = Path.COMMAND_MAIN;
+        } else {
+            LOG.warn("Resubmit form");
+            return Path.PAGE_ERROR;
+        }
         User user = (User) session.getAttribute("user");
         Bill bill = user.getBill();
         LOG.trace("User " + user + "has bill: " + bill);
@@ -40,6 +52,23 @@ public class RechargeCommand implements Command {
         LOG.trace("Update balance in table spr_bills");
         LOG.debug("Command 'recharge' successfully finished");
 
-        return Path.COMMAND_MAIN;
+        return forward;
+    }
+
+    private String checkResubmit(HttpServletRequest request) {
+        String forward;
+        HttpSession session = request.getSession(false);
+        String uid = request.getParameter("uid");
+        LOG.trace("Request parameter in 'recharge' command: " + uid);
+
+        if (session != null && !uid.equals(session.getAttribute("uid"))) {
+            session.setAttribute("uid", uid);
+            LOG.trace("Set uid in the session in 'recharge' command" + uid);
+            forward = Path.PAGE_MAIN;
+        } else {
+            LOG.warn("Resubmit form");
+            return Path.PAGE_ERROR;
+        }
+        return forward;
     }
 }

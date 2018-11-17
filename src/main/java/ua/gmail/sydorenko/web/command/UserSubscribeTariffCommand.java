@@ -20,7 +20,11 @@ public class UserSubscribeTariffCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'subscribe tariff for user' starts");
+
+        String forward = checkResubmit(request);
+        LOG.trace("Check is successfully finished ");
         HttpSession session = request.getSession(false);
+
         UserDao userDao = new UserDaoImpl();
         TariffDao tariffDao = new TariffDaoImpl();
         BillDao billDao = new BillDaoImpl();
@@ -57,6 +61,23 @@ public class UserSubscribeTariffCommand implements Command {
         LOG.trace("Update user in session " + user);
         LOG.debug("Command 'subscribe tariff for user' successfully finished");
 
-        return Path.PAGE_MAIN;
+        return forward;
+    }
+
+    private String checkResubmit(HttpServletRequest request) {
+        String forward;
+        HttpSession session = request.getSession(false);
+        String uid = request.getParameter("uid");
+        LOG.trace("Request parameter in 'subscribe tariff' command: " + uid);
+
+        if (session != null && !uid.equals(session.getAttribute("uid"))) {
+            session.setAttribute("uid", uid);
+            LOG.trace("Set uid in the session in 'subscribe tariff' command" + uid);
+            forward = Path.PAGE_MAIN;
+        } else {
+            LOG.warn("Resubmit form");
+            return Path.PAGE_ERROR;
+        }
+        return forward;
     }
 }
