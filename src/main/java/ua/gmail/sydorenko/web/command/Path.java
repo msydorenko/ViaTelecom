@@ -6,6 +6,7 @@ package ua.gmail.sydorenko.web.command;
  * @author M.Sydorenko
  */
 public interface Path {
+
     String PAGE_INDEX = "/index.jsp";
     String PAGE_LOGIN = "/login.jsp";
     String PAGE_EDIT_TARIFF = "/WEB-INF/jsp/editTariff.jsp";
