@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author M.Sydorenko
  */
-public class UserSubscribeTariffCommand implements Command {
+public class UserSubscribeTariffCommand extends GeneralCommand {
     private static final long serialVersionUID = 6346303699053123541L;
     private static final Logger LOG = Logger.getLogger(UserSubscribeTariffCommand.class);
 
@@ -64,20 +64,5 @@ public class UserSubscribeTariffCommand implements Command {
         return forward;
     }
 
-    private String checkResubmit(HttpServletRequest request) {
-        String forward;
-        HttpSession session = request.getSession(false);
-        String uid = request.getParameter("uid");
-        LOG.trace("Request parameter in 'subscribe tariff' command: " + uid);
 
-        if (session != null && !uid.equals(session.getAttribute("uid"))) {
-            session.setAttribute("uid", uid);
-            LOG.trace("Set uid in the session in 'subscribe tariff' command" + uid);
-            forward = Path.PAGE_MAIN;
-        } else {
-            LOG.warn("Resubmit form");
-            return Path.PAGE_ERROR;
-        }
-        return forward;
-    }
 }
