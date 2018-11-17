@@ -32,7 +32,7 @@ public class LoginCommand extends GeneralCommand {
 
         String errorMessage;
         String forward = Path.PAGE_LOGIN;
-        if (checkFieldsFill(request, login, password)) {
+        if (fillFields(request, login, password)) {
             return forward;
         }
         LOG.trace("Check fields is successfully finished");
@@ -60,7 +60,7 @@ public class LoginCommand extends GeneralCommand {
         return forward;
     }
 
-    private boolean checkFieldsFill(HttpServletRequest request, String login, String password) {
+    private boolean fillFields(HttpServletRequest request, String login, String password) {
         String errorMessage;
         if (login == null || password == null || password.equals("") || login.equals("")) {
             errorMessage = "Enter your login and password";
