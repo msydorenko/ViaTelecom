@@ -1,5 +1,10 @@
 package ua.gmail.sydorenko.web.command;
 
+/**
+ * Path to all pages.
+ *
+ * @author M.Sydorenko
+ */
 public interface Path {
     String PAGE_INDEX = "/index.jsp";
     String PAGE_LOGIN = "/login.jsp";
@@ -9,7 +14,7 @@ public interface Path {
     String PAGE_CLIENT_DATA = "/WEB-INF/jsp/clientData.jsp";
     String PAGE_ERROR = "/WEB-INF/jsp/error.jsp";
 /*
-    String PAGE_CLIENT_DATA = "/WEB-INF/jsp/editClient.jsp";
+    String PAGE_CLIENT_DATA = "/WEB-INF/jsp/editClient!!!.jsp";
 */
 
     String COMMAND_MAIN = "viatelecom?command=main";

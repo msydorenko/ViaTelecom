@@ -24,10 +24,12 @@ public class RechargeCommand implements Command {
         User user = (User) session.getAttribute("user");
         Bill bill = user.getBill();
         LOG.trace("User " + user + "has bill: " + bill);
+        int oldBalance = bill.getValue();
 
-        int newBalance = Integer.parseInt(request.getParameter("newBalance"));
-        LOG.trace("User want to update the balance to " + newBalance + "UAH");
+        int deposit = Integer.parseInt(request.getParameter("newBalance"));
+        LOG.trace("User want to update the balance to " + deposit + "UAH");
 
+        int newBalance = oldBalance + deposit;
         bill.setValue(newBalance);
         user.setBill(bill);
         session.setAttribute("user", user);

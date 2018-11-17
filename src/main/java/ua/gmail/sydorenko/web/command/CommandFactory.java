@@ -10,7 +10,6 @@ import java.util.Map;
  * Holder for all commands
  *
  * @author M.Sydorenko
- *
  */
 public class CommandFactory {
     private static CommandFactory instance;
@@ -46,17 +45,22 @@ public class CommandFactory {
         commandList.put("clientData", new ClientDataCommand());
         commandList.put("createOrUpdate", new CreateOrUpdateClientCommand());
         commandList.put("deleteUser", new DeleteClientCommand());
-
-
+        commandList.put("noCommand", new NoCommand());
         commandList.put("logout", new LogoutCommand());
     }
 
+    /**
+     * Return command object with the given request.
+     *
+     * @param request
+     * @return Command object
+     */
     public Command getCommand(HttpServletRequest request) {
         String nameCommand = request.getParameter("command");
-        Command command = null;
-        if (nameCommand != null || !nameCommand.equals("")) {
-            command = commandList.get(nameCommand);
+        if (nameCommand == null || !commandList.containsKey(nameCommand)) {
+            LOG.trace("Command not found: " + nameCommand);
+            return commandList.get("noCommand");
         }
-        return command;
+        return commandList.get(nameCommand);
     }
 }

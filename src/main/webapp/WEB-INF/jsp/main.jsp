@@ -35,6 +35,13 @@
     </form>
 </div>
 
+<c:if test="${userRole.name eq 'client'}">
+    <div>
+        <p><fmt:message key="client.welcome"/>, ${user.first_name} ${user.last_name}!</p>
+        <p><fmt:message key="client.welcome.bill.number"/> № ${user.bill.number}.</p>
+        <p><fmt:message key="client.welcome.bill.value"/>: ${user.bill.value} UAH</p>
+    </div>
+</c:if>
 <c:if test="${not empty errorMessage}">
     <div class="">${errorMessage}</div>
 </c:if>
@@ -154,6 +161,12 @@
             </select>
             <input type="text" name="name" placeholder="Tariff name">
             <input type="text" name="price" placeholder="Price">
+            <div>
+                <label>
+                    <fmt:message key="admin.change.tariff.description.Tariff"/>
+                </label>
+                <textarea name="description" rows="3" minlength="10" maxlength="250" required></textarea>
+            </div>
             <input type="text" name="description" placeholder="Description">
             <input type="submit" value="<fmt:message key="admin.button.addTariff"/>"/>
         </form>
