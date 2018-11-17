@@ -1,13 +1,12 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
 import ua.gmail.sydorenko.database.template.TariffTemplate;
 import ua.gmail.sydorenko.database.template.Template;
-import ua.gmail.sydorenko.database.template.UserTemplate;
 
 import java.util.List;
 
@@ -42,8 +41,16 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SQL_GET_NEXT_AUTOINCREMENT = "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'viatelecom' AND TABLE_NAME = 'users'";
 
-    private Template template = new UserTemplate();
-    private MySQLManager manager = MySQLManager.getInstance();
+    private DBManager manager;
+    private Template template;
+
+    public UserDaoImpl() {
+    }
+
+    public UserDaoImpl(DBManager manager, Template template) {
+        this.manager = manager;
+        this.template = template;
+    }
 
     @Override
     public List<User> readByLogin(String login) throws DaoSystemException {

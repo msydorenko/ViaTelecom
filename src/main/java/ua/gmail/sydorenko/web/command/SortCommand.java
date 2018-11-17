@@ -1,5 +1,7 @@
 package ua.gmail.sydorenko.web.command;
 
+import org.apache.log4j.Logger;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.util.Sorter;
@@ -12,14 +14,21 @@ import java.util.List;
 /**
  * @author M.Sydorenko
  */
-public class SortCommand implements Command {
+public class SortCommand extends GeneralCommand {
     private static final long serialVersionUID = -1622239054448131571L;
+    private static final Logger LOG = Logger.getLogger(SortCommand.class);
+
+    public SortCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
+        LOG.debug("Command 'sort command' starts");
+
         String value = request.getParameter("value");
         HttpSession session = request.getSession(false);
-        List<Tariff> tariffList = (List<Tariff>) session.getAttribute("tariffList");
+        List<Tariff> tariffList = tariffDao.readAll();
         switch (value) {
             case "az": {
                 Collections.sort(tariffList, Sorter.SORT_BY_NAME_AZ);
@@ -39,6 +48,7 @@ public class SortCommand implements Command {
             }
         }
         session.setAttribute("tariffList", tariffList);
+        LOG.debug("Command 'sort command' finished");
         return Path.PAGE_MAIN;
     }
 }

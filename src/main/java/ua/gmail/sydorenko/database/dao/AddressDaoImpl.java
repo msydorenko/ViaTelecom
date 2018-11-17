@@ -1,10 +1,9 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Address;
-import ua.gmail.sydorenko.database.template.AddressTemplate;
 import ua.gmail.sydorenko.database.template.Template;
 
 import java.util.List;
@@ -24,8 +23,16 @@ public class AddressDaoImpl implements AddressDao {
             "house = ?, flat =? WHERE id = ?";
     private static final String SQL_DELETE_ADDRESS = "DELETE FROM viatelecom.spr_addresses WHERE id = ?";
 
-    Template template = new AddressTemplate();
-    MySQLManager manager = MySQLManager.getInstance();
+    DBManager manager;
+    Template template;
+
+    public AddressDaoImpl() {
+    }
+
+    public AddressDaoImpl(DBManager manager, Template template) {
+        this.manager = manager;
+        this.template = template;
+    }
 
     @Override
     public List<Address> readAll() throws DaoSystemException {

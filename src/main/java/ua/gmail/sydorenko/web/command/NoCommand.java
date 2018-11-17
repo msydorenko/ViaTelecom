@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author M.Sydorenko
  */
-public class NoCommand implements Command {
+public class NoCommand extends GeneralCommand {
     private static final long serialVersionUID = 4272101993597627486L;
     private static final Logger LOG = Logger.getLogger(NoCommand.class);
 

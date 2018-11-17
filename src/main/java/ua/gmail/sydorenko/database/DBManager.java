@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public interface DBManager {
 
-    Connection getConnection() throws DaoSystemException, SQLException;
+    Connection getConnection() throws DaoSystemException;
 
     void commitAndClose(Connection connection) throws DaoSystemException;
 

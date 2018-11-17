@@ -1,6 +1,6 @@
 package ua.gmail.sydorenko.database.template;
 
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Entity;
 
@@ -18,7 +18,7 @@ public abstract class Template<T extends Entity> {
      * @param manager the DataSource instance
      * @param query   the database query
      */
-    public void executeQuery(MySQLManager manager, String query) throws DaoSystemException {
+    public void executeQuery(DBManager manager, String query) throws DaoSystemException {
         executeQuery(manager, query, new Object[0]);
     }
 
@@ -29,7 +29,7 @@ public abstract class Template<T extends Entity> {
      * @param query   the database query
      * @param values  arguments
      */
-    public void executeQuery(MySQLManager manager, String query, Object... values) throws DaoSystemException {
+    public void executeQuery(DBManager manager, String query, Object... values) throws DaoSystemException {
         Connection connection = manager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             setParamInQuery(preparedStatement, values);
@@ -48,7 +48,7 @@ public abstract class Template<T extends Entity> {
      * @param query    the database query
      * @return the list of {@link ua.gmail.sydorenko.database.entity.Entity}
      */
-    public List<T> executeAndReturn(MySQLManager manager, String query) throws DaoSystemException {
+    public List<T> executeAndReturn(DBManager manager, String query) throws DaoSystemException {
         return executeAndReturn(manager, query, new Object[0]);
     }
 
@@ -60,7 +60,7 @@ public abstract class Template<T extends Entity> {
      * @param values   arguments
      * @return the list of {@link ua.gmail.sydorenko.database.entity.Entity}
      */
-    public List<T> executeAndReturn(MySQLManager manager, String query, Object... values) throws DaoSystemException {
+    public List<T> executeAndReturn(DBManager manager, String query, Object... values) throws DaoSystemException {
         List<T> list = new ArrayList<>();
         Connection connection = manager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -91,7 +91,7 @@ public abstract class Template<T extends Entity> {
      * @param query    the database query
      * @return next automatic id mysql
      */
-    public int readNextAutoIncrement(MySQLManager manager, String query) throws DaoSystemException {
+    public int readNextAutoIncrement(DBManager manager, String query) throws DaoSystemException {
         Integer nextId = -1;
         Connection connection = manager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);

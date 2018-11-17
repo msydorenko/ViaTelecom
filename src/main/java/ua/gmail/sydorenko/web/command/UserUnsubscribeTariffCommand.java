@@ -1,10 +1,7 @@
 package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.TariffDao;
-import ua.gmail.sydorenko.database.dao.TariffDaoImpl;
-import ua.gmail.sydorenko.database.dao.UserDao;
-import ua.gmail.sydorenko.database.dao.UserDaoImpl;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
@@ -14,9 +11,13 @@ import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.Set;
 
-public class UserUnsubscribeTariffCommand implements Command {
+public class UserUnsubscribeTariffCommand extends GeneralCommand{
     private static final long serialVersionUID = -4568479273029386042L;
     private static final Logger LOG = Logger.getLogger(UserUnsubscribeTariffCommand.class);
+
+    public UserUnsubscribeTariffCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
@@ -40,7 +41,6 @@ public class UserUnsubscribeTariffCommand implements Command {
         user.setTariffs(tariffs);
         LOG.trace("Refresh list of tariffs for user: " + user);
 
-        UserDao userDao = new UserDaoImpl();
         userDao.deleteTariffForUser(user, tariffId);
         LOG.trace("Delete link on tariff in table user_orders");
 

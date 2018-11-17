@@ -1,8 +1,7 @@
 package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.BillDao;
-import ua.gmail.sydorenko.database.dao.BillDaoImpl;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.entity.User;
@@ -13,26 +12,21 @@ import javax.servlet.http.HttpSession;
 /**
  * @author M.Sydorenko
  */
-public class RechargeCommand implements Command {
+public class RechargeCommand extends GeneralCommand {
     private static final long serialVersionUID = 3170568683038905724L;
     private static final Logger LOG = Logger.getLogger(RechargeCommand.class);
+
+    public RechargeCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'recharge' starts");
-        String forward;
-        HttpSession session = request.getSession(false);
-        String uid = request.getParameter("uid");
-        LOG.trace("Request parameter in 'recharge' command: " + uid);
+        String forward = checkResubmit(request);
+        LOG.trace("Check is successfully finished");
 
-        if (session != null && !uid.equals(session.getAttribute("uid"))) {
-            session.setAttribute("uid", uid);
-            LOG.trace("Set uid in the session in 'recharge' command" + uid);
-            forward = Path.COMMAND_MAIN;
-        } else {
-            LOG.warn("Resubmit form");
-            return Path.PAGE_ERROR;
-        }
+        HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
         Bill bill = user.getBill();
         LOG.trace("User " + user + "has bill: " + bill);
@@ -47,7 +41,6 @@ public class RechargeCommand implements Command {
         session.setAttribute("user", user);
         LOG.trace("Update user in session " + user);
 
-        BillDao billDao = new BillDaoImpl();
         billDao.update(bill);
         LOG.trace("Update balance in table spr_bills");
         LOG.debug("Command 'recharge' successfully finished");

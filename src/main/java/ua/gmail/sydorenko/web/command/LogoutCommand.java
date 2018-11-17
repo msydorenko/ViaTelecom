@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author M.Sydorenko
  */
-public class LogoutCommand implements Command {
+public class LogoutCommand extends GeneralCommand {
     private static final long serialVersionUID = 6566772108670704658L;
     private static final Logger LOG = Logger.getLogger(LogoutCommand.class);
 

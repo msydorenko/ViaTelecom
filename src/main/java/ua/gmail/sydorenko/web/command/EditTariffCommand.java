@@ -1,8 +1,7 @@
 package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.TariffDao;
-import ua.gmail.sydorenko.database.dao.TariffDaoImpl;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 
@@ -12,9 +11,13 @@ import javax.servlet.http.HttpSession;
 /**
  * @author M.Sydorenko
  */
-public class EditTariffCommand implements Command {
+public class EditTariffCommand extends GeneralCommand {
     private static final long serialVersionUID = 8622466701403055217L;
     private static final Logger LOG = Logger.getLogger(EditTariffCommand.class);
+
+    public EditTariffCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
@@ -26,10 +29,9 @@ public class EditTariffCommand implements Command {
         tariff.setName(request.getParameter("tariffName"));
         tariff.setPrice(Integer.parseInt(request.getParameter("tariffPrice")));
         tariff.setDescription(request.getParameter("tariffDescription"));
-        LOG.trace("Create new value for tariff --> " +tariff);
+        LOG.trace("Create new value for tariff --> " + tariff);
 
-        TariffDao service = new TariffDaoImpl();
-        service.update(tariff);
+        tariffDao.update(tariff);
         LOG.debug("Edit tariff was finished successfully");
         return Path.COMMAND_MAIN;
     }

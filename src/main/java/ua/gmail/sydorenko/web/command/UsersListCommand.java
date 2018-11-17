@@ -12,17 +12,17 @@ import java.util.List;
 /**
  * @author M.Sydorenko
  */
-public class UsersListCommand implements Command {
+public class UsersListCommand extends GeneralCommand {
     private static final long serialVersionUID = 8379728542243211585L;
     private static final Logger LOG = Logger.getLogger(UsersListCommand.class);
+
+    public UsersListCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'list of users' starts");
-        UserDao userDao = new UserDaoImpl();
-        BillDao billDao = new BillDaoImpl();
-        AddressDao addressDao = new AddressDaoImpl();
-        ContactDao contactDao = new ContactDaoImpl();
 
         List<User> users = userDao.readAll();
         List<User> completeUser = new ArrayList<>();

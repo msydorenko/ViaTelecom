@@ -1,10 +1,7 @@
 package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.ServiceDao;
-import ua.gmail.sydorenko.database.dao.ServiceDaoImpl;
-import ua.gmail.sydorenko.database.dao.TariffDao;
-import ua.gmail.sydorenko.database.dao.TariffDaoImpl;
+import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Service;
 import ua.gmail.sydorenko.database.entity.Tariff;
@@ -16,23 +13,24 @@ import java.util.List;
 /**
  * @author M.Sydorenko
  */
-public class MainCommand implements Command {
+public class MainCommand extends GeneralCommand {
     private static final long serialVersionUID = -4461981504404538233L;
     private static final Logger LOG = Logger.getLogger(MainCommand.class);
+
+    public MainCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'main' starts");
-        ServiceDao serviceDao = new ServiceDaoImpl();
-        TariffDao tariffDao = new TariffDaoImpl();
 
         HttpSession session = request.getSession(false);
-        List<Service> serviceList = (List<Service>) session.getAttribute("serviceList");
+
+        List<Service> serviceList = serviceDao.readAll();
         List<Tariff> tariffList = tariffDao.readAll();
-        if (serviceList == null) {
-            serviceList = serviceDao.readAll();
-        }
         LOG.trace("Obtain list of services and list of tariffs");
+
         session.setAttribute("tariffList", tariffList);
         session.setAttribute("serviceList", serviceList);
         LOG.debug("Command 'main' was successfully finished");

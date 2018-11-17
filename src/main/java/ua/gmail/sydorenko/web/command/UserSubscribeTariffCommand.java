@@ -17,17 +17,25 @@ public class UserSubscribeTariffCommand extends GeneralCommand {
     private static final long serialVersionUID = 6346303699053123541L;
     private static final Logger LOG = Logger.getLogger(UserSubscribeTariffCommand.class);
 
+    public UserSubscribeTariffCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
+
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'subscribe tariff for user' starts");
 
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished ");
-        HttpSession session = request.getSession(false);
 
-        UserDao userDao = new UserDaoImpl();
-        TariffDao tariffDao = new TariffDaoImpl();
-        BillDao billDao = new BillDaoImpl();
+        balanceProcessing(request);
+        LOG.debug("Command 'subscribe tariff for user' successfully finished");
+
+        return forward;
+    }
+
+    private void balanceProcessing(HttpServletRequest request) throws DaoSystemException {
+        HttpSession session = request.getSession(false);
 
         User user = (User) session.getAttribute("user");
         int userId = user.getId();
@@ -59,10 +67,5 @@ public class UserSubscribeTariffCommand extends GeneralCommand {
 
         session.setAttribute("user", user);
         LOG.trace("Update user in session " + user);
-        LOG.debug("Command 'subscribe tariff for user' successfully finished");
-
-        return forward;
     }
-
-
 }

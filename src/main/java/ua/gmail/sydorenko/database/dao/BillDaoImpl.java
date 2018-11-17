@@ -1,7 +1,7 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.template.BillTemplate;
@@ -20,8 +20,16 @@ public class BillDaoImpl implements BillDao {
     private static final String SQL_UPDATE_BILL = "UPDATE viatelecom.spr_bills SET value = ? WHERE id = ?";
     private static final String SQL_DELETE_BILL = "DELETE FROM viatelecom.spr_bills WHERE id = ?";
 
-    Template template = new BillTemplate();
-    MySQLManager manager = MySQLManager.getInstance();
+    DBManager manager;
+    Template template;
+
+    public BillDaoImpl() {
+    }
+
+    public BillDaoImpl(DBManager manager, Template template) {
+        this.manager = manager;
+        this.template = template;
+    }
 
     @Override
     public List<Bill> readAll() throws DaoSystemException {

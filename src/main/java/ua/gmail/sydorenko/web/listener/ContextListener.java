@@ -2,17 +2,28 @@ package ua.gmail.sydorenko.web.listener;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import ua.gmail.sydorenko.database.DBManager;
+import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.dao.*;
+import ua.gmail.sydorenko.database.template.*;
+import ua.gmail.sydorenko.web.command.*;
 
+import javax.naming.NamingException;
+import javax.naming.ldap.Control;
+import javax.naming.ldap.ControlFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class ContextListener implements ServletContextListener {
-    private final static Logger LOG = Logger.getLogger(ContextListener.class.getName());
+    private final static Logger LOG = Logger.getLogger(ContextListener.class);
+    private AddressDao addressDao;
+    private BillDao billDao;
+    private ContactDao contactDao;
+    private ServiceDao serviceDao;
+    private TariffDao tariffDao;
+    private UserDao userDao;
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
@@ -20,6 +31,8 @@ public class ContextListener implements ServletContextListener {
         ServletContext servletContext = event.getServletContext();
         initLod4j(servletContext);
         initI18N(servletContext);
+        initDao();
+        initCommandFactory(servletContext);
         LOG.trace("Initialization has finished successfully");
     }
 
@@ -57,5 +70,48 @@ public class ContextListener implements ServletContextListener {
             servletContext.setAttribute("locales", locales);
         }
         LOG.debug("I18N subsystem initialization finished");
+    }
+
+    private void initDao() {
+        LOG.trace("DAO initialisation start");
+        DBManager manager = new MySQLManager();
+        addressDao = new AddressDaoImpl(manager, new AddressTemplate());
+        billDao = new BillDaoImpl(manager, new BillTemplate());
+        contactDao = new ContactDaoImpl(manager, new ContactTemplate());
+        serviceDao = new ServiceDaoImpl(manager, new ServiceTemplate());
+        tariffDao = new TariffDaoImpl(manager, new TariffTemplate());
+        userDao = new UserDaoImpl(manager, new UserTemplate());
+        LOG.debug("DAO initialization finished");
+    }
+
+    private void initCommandFactory(ServletContext servletContext) {
+        LOG.trace("CommandFactory initialisation start");
+        Map<String, Command> commandList = new HashMap<>();
+        commandList.put("login", new LoginCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("main", new MainCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("addTariff", new AddTariffCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("tariffList", new TariffListCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("sort", new SortCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("editTariff", new EditTariffCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("deleteTariff", new DeleteTariffCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("openEditTariffPage", new OpenEditTariffPageCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("userSubscribeTariff", new UserSubscribeTariffCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("userUnsubscribeTariff", new UserUnsubscribeTariffCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("locale", new I18NCommand());
+        commandList.put("download", new DownloadCommand());
+        commandList.put("recharge", new RechargeCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("usersList", new UsersListCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("changeUserStatus", new ChangeUserStatusCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("clientData", new ClientDataCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("createOrUpdate", new CreateOrUpdateClientCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("deleteUser", new DeleteClientCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
+        commandList.put("noCommand", new NoCommand());
+        commandList.put("logout", new LogoutCommand());
+        LOG.trace("Create list of command");
+
+        CommandFactory commandFactory = new CommandFactory(commandList);
+        servletContext.setAttribute("commandFactory", commandFactory);
+
+        LOG.debug("CommandFactory initialization finished");
     }
 }

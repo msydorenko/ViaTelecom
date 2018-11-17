@@ -1,7 +1,7 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Service;
 import ua.gmail.sydorenko.database.template.ServiceTemplate;
@@ -17,11 +17,15 @@ public class ServiceDaoImpl implements ServiceDao {
     private static final String SQL_READ_ALL_SERVICE = "SELECT id, name" +
             " FROM viatelecom.spr_services";
 
-    private Template template = new ServiceTemplate();
-    private MySQLManager manager;
+    private DBManager manager;
+    private Template template;
 
-    {
-        manager = MySQLManager.getInstance();
+    public ServiceDaoImpl() {
+    }
+
+    public ServiceDaoImpl(DBManager manager, Template template) {
+        this.manager = manager;
+        this.template = template;
     }
 
     @Override

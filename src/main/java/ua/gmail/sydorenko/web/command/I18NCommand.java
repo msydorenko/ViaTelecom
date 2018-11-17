@@ -9,7 +9,7 @@ import javax.servlet.jsp.jstl.core.Config;
 /**
  * @author M.Sydorenko
  */
-public class I18NCommand implements Command {
+public class I18NCommand extends GeneralCommand {
     private static final long serialVersionUID = -3165651694385267236L;
     private static final Logger LOG = Logger.getLogger(I18NCommand.class);
 

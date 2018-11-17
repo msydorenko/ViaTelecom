@@ -1,10 +1,9 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
-import ua.gmail.sydorenko.database.template.TariffTemplate;
 import ua.gmail.sydorenko.database.template.Template;
 
 import java.util.List;
@@ -25,8 +24,13 @@ public class TariffDaoImpl implements TariffDao {
             "description = ? WHERE id = ?";
     private static final String SQL_DELETE_TARIFF = "DELETE FROM viatelecom.tariffs WHERE id = ?";
 
-    private Template template = new TariffTemplate();
-    private MySQLManager manager = MySQLManager.getInstance();
+    private DBManager manager;
+    private Template template;
+
+    public TariffDaoImpl(DBManager manager, Template template) {
+        this.manager = manager;
+        this.template = template;
+    }
 
     @Override
     public List<Tariff> readAll() throws DaoSystemException {
@@ -52,6 +56,7 @@ public class TariffDaoImpl implements TariffDao {
         return tariffList;
     }
 
+    @Override
     public List<Tariff> readByIdService(int id) throws DaoSystemException {
         List<Tariff> tariffList;
         try {

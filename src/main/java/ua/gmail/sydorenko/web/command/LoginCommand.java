@@ -13,9 +13,13 @@ import java.util.List;
 /**
  * @author M.Sydorenko
  */
-public class LoginCommand implements Command {
+public class LoginCommand extends GeneralCommand {
     private static final long serialVersionUID = -6425350012888495169L;
     private static final Logger LOG = Logger.getLogger(LoginCommand.class);
+
+    public LoginCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
 
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
@@ -25,21 +29,49 @@ public class LoginCommand implements Command {
         String login = request.getParameter("login");
         LOG.trace("Request parameter: loging --> " + login);
         String password = request.getParameter("password");
+
         String errorMessage;
         String forward = Path.PAGE_LOGIN;
+        if (checkFieldsFill(request, login, password)) {
+            return forward;
+        }
+        LOG.trace("Check fields is successfully finished");
 
-        if (password.equals("") || login.equals("") || login == null || password == null) {
-            errorMessage = "Enter your login and password";
+        User user = createUser(login);
+        LOG.trace("Create user is successfully finished");
+
+        if (user == null || !SecurePassword.check(password, user.getPassword())) {
+            errorMessage = "Incorrect data. Please, check it!";
             request.setAttribute("errorMessage", errorMessage);
             LOG.error("errorMessage --> " + errorMessage);
             return forward;
+        } else {
+            Role role = Role.getRole(user);
+            LOG.trace("userRole --> " + role);
+            forward = Path.COMMAND_MAIN;
+
+            session.setAttribute("user", user);
+            LOG.trace("Set the session attribute: user --> " + user);
+            session.setAttribute("userRole", role);
+            LOG.trace("Set the session attribute: userRole --> " + role);
+
+            LOG.info("User " + user + " logged as " + role.toString().toLowerCase());
         }
+        return forward;
+    }
 
-        UserDao userDao = new UserDaoImpl();
-        BillDao billDao = new BillDaoImpl();
-        AddressDao addressDao = new AddressDaoImpl();
-        ContactDao contactDao = new ContactDaoImpl();
+    private boolean checkFieldsFill(HttpServletRequest request, String login, String password) {
+        String errorMessage;
+        if (login == null || password == null || password.equals("") || login.equals("")) {
+            errorMessage = "Enter your login and password";
+            request.setAttribute("errorMessage", errorMessage);
+            LOG.error("errorMessage --> " + errorMessage);
+            return true;
+        }
+        return false;
+    }
 
+    private User createUser(String login) throws DaoSystemException {
         User user = userDao.readByLogin(login).get(0);
         int userId = user.getId();
         LOG.trace("Found in DB: user --> " + user);
@@ -60,24 +92,6 @@ public class LoginCommand implements Command {
         user.setBill(bill);
         user.setAddress(address);
         user.setContact(contact);
-
-        if (user == null || !SecurePassword.check(password, user.getPassword())) {
-            errorMessage = "Incorrect data. Please, check it!";
-            request.setAttribute("errorMessage", errorMessage);
-            LOG.error("errorMessage --> " + errorMessage);
-            return forward;
-        } else {
-            Role role = Role.getRole(user);
-            LOG.trace("userRole --> " + role);
-            forward = Path.COMMAND_MAIN;
-
-            session.setAttribute("user", user);
-            LOG.trace("Set the session attribute: user --> " + user);
-            session.setAttribute("userRole", role);
-            LOG.trace("Set the session attribute: userRole --> " + role);
-
-            LOG.info("User " + user + " logged as " + role.toString().toLowerCase());
-        }
-        return forward;
+        return user;
     }
 }

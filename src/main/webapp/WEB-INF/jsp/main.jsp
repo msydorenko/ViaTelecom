@@ -166,10 +166,10 @@
                 <label>
                     <fmt:message key="admin.change.tariff.description.Tariff"/>
                 </label>
-                <textarea name="description" rows="3" minlength="10" maxlength="250" required></textarea>
+                <textarea name="description" rows="3" minlength="10" maxlength="250"
+                          placeholder="<fmt:message key="admin.change.tariff.description.placeholder"/> required></textarea>
             </div>
-            <input type="text" name="description" placeholder="Description">
-            <input type="submit" value="<fmt:message key="admin.button.addTariff"/>"/>
+            <input type=" submit" value="<fmt:message key="admin.button.addTariff"/>"/>
         </form>
     </div>
 </c:if>

@@ -1,10 +1,9 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.MySQLManager;
+import ua.gmail.sydorenko.database.DBManager;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Contact;
-import ua.gmail.sydorenko.database.template.ContactTemplate;
 import ua.gmail.sydorenko.database.template.Template;
 
 import java.util.List;
@@ -17,8 +16,16 @@ public class ContactDaoImpl implements ContactDao {
     private static final String SQL_UPDATE_CONTACT = "UPDATE viatelecom.spr_contacts SET phone_number = ? email = ? WHERE id = ?";
     private static final String SQL_DELETE_CONTACT = "DELETE FROM viatelecom.spr_contacts WHERE id = ?";
 
-    Template template = new ContactTemplate();
-    MySQLManager manager = MySQLManager.getInstance();
+    DBManager manager;
+    Template template;
+
+    public ContactDaoImpl() {
+    }
+
+    public ContactDaoImpl(DBManager manager, Template template) {
+        this.manager = manager;
+        this.template = template;
+    }
 
     @Override
     public List<Contact> readAll() throws DaoSystemException {

@@ -15,31 +15,20 @@ import javax.servlet.http.HttpSession;
 /**
  * @author M.Sydorenko
  */
-public class CreateOrUpdateClientCommand implements Command {
+public class CreateOrUpdateClientCommand extends GeneralCommand {
     private static final long serialVersionUID = -1947553783638751603L;
     private static final Logger LOG = Logger.getLogger(CreateOrUpdateClientCommand.class);
     private static final int ID_ROLE_CLIENT = 2;
 
+    public CreateOrUpdateClientCommand(AddressDao addressDao, BillDao billDao, ContactDao contactDao, ServiceDao serviceDao, TariffDao tariffDao, UserDao userDao) {
+        super(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao);
+    }
+
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'create or update client' starts");
-        String forward;
-        HttpSession session = request.getSession(false);
-        String uid = request.getParameter("uid");
-        LOG.trace("Request parameter: " + uid);
-
-        if (session != null && !uid.equals(session.getAttribute("uid"))) {
-            session.setAttribute("uid", uid);
-            LOG.trace("Set uid in the session from 'create or update' page" + uid);
-            forward = Path.COMMAND_CLIENTS_LIST;
-        } else {
-            LOG.warn("Resubmit form");
-            return Path.PAGE_ERROR;
-        }
-        UserDao userDao = new UserDaoImpl();
-        BillDao billDao = new BillDaoImpl();
-        AddressDao addressDao = new AddressDaoImpl();
-        ContactDao contactDao = new ContactDaoImpl();
+        String forward = checkResubmit(request);
+        LOG.trace("Check is successfully finished");
 
         Address address = createAddress(request);
         Contact contact = createContact(request);

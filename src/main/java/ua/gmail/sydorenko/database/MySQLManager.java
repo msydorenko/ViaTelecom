@@ -15,30 +15,14 @@ import java.sql.SQLException;
  * @author M.Sydorenko
  */
 public class MySQLManager implements DBManager {
-    private static final Logger LOG = Logger.getLogger(MySQLManager.class.getName());
-    private static MySQLManager instance;
-    private static DataSource dataSource;
-
-    private MySQLManager() {
-
-    }
-
-    /**
-     * Create single instance of MySQLManager
-     *
-     * @throws DaoSystemException if attempt to connect to database was failed
-     */
-    public static synchronized MySQLManager getInstance() {
-        if (instance == null)
-            instance = new MySQLManager();
-        return instance;
-    }
+    private static final Logger LOG = Logger.getLogger(DBManager.class);
 
     /**
      * Method establish connection to database
      *
      * @return Connection
      */
+    @Override
     public Connection getConnection() throws DaoSystemException {
         Connection con = null;
         try {
@@ -47,10 +31,11 @@ public class MySQLManager implements DBManager {
             DataSource ds = (DataSource) envContext.lookup("jdbc/ViatelecomDB");
             con = ds.getConnection();
         } catch (NamingException ex) {
-            ex.printStackTrace();
             LOG.error("Cannot obtain a connection from the pool", ex);
+            ex.printStackTrace();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("Cannot obtain a connection from the pool", e);
+            throw new DaoSystemException("Cannot obtain a connection from the pool", e);
         }
         return con;
     }
