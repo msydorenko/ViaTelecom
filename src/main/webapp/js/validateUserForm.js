@@ -75,7 +75,7 @@ function checkform() {
 
     var regexBillNumber = /^[0-9]{5,20}/;
     if (!regexBillNumber.test(billNumber.value)) {
-        alert("Bill numrber 5-20 characters long: " + billNumber.value);
+        alert("Bill must be 5-20 numbers long: " + billNumber.value);
         billNumber.focus();
         return false;
     }

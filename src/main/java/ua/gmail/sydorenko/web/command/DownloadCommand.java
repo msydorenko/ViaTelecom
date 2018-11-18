@@ -23,6 +23,7 @@ public class DownloadCommand extends GeneralCommand {
             PdfCreator.downloadTariffs(tariffList);
         }
         LOG.debug("Command 'download tariff's list' finished");
+
         return Path.PAGE_MAIN;
     }
 }

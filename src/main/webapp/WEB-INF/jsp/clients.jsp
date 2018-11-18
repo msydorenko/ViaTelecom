@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/jspf/directive.jspf" %>
 <%@ include file="/WEB-INF/jspf/taglib.jspf" %>
+<%@ taglib prefix="entity" tagdir="/WEB-INF/tags" %>
 
 <html>
 <c:set var="title" value="ViaTelecom" scope="page"/>
@@ -25,51 +26,9 @@
                 <th><fmt:message key="admin.clients.table.edit"/></th>
                 <th><fmt:message key="admin.clients.table.delete"/></th>
             </tr>
-            <c:forEach var="user" items="${completeUser}">
+            <c:forEach var="oneUser" items="${completeUser}">
                 <tr>
-                    <td>${user.first_name}</td>
-                    <td>${user.last_name}</td>
-                    <td>${user.bill.number}</td>
-                    <td><c:choose>
-                        <c:when test="${user.blocked}">
-                            <form class="" method="post" action="viatelecom">
-                                <input type="hidden" name="command" value="changeUserStatus"/>
-                                <input type="hidden" name="action" value="unblock"/>
-                                <input type="hidden" name="idUserForChange" value="${user.id}"/>
-                                <button class="" type="submit">
-                                    <fmt:message key="admin.clients.table.block"/>
-                                </button>
-                            </form>
-                        </c:when>
-                        <c:otherwise>
-                            <form class="" method="post" action="viatelecom">
-                                <input type="hidden" name="command" value="changeUserStatus"/>
-                                <input type="hidden" name="action" value="block"/>
-                                <input type="hidden" name="idUserForChange" value="${user.id}"/>
-                                <button class="" type="submit">
-                                    <fmt:message key="admin.clients.table.active"/>
-                                </button>
-                            </form>
-                        </c:otherwise>
-                    </c:choose></td>
-                    <td>
-                        <form class="" method="post" action="viatelecom">
-                            <input type="hidden" name="command" value="clientData"/>
-                            <input type="hidden" name="idUserForChange" value="${user.id}"/>
-                            <button class="" type="submit">
-                                <fmt:message key="admin.clients.table.user.edit"/>
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form class="" method="post" action="viatelecom">
-                            <input type="hidden" name="command" value="deleteUser"/>
-                            <input type="hidden" name="idUserForChange" value="${user.id}"/>
-                            <button class="" type="submit">
-                                <fmt:message key="admin.clients.table.user.delete"/>
-                            </button>
-                        </form>
-                    </td>
+                    <entity:client client="${oneUser}"/>
                 </tr>
             </c:forEach>
         </table>
