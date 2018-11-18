@@ -1,4 +1,3 @@
-/*
 package ua.gmail.sydorenko.web.filter;
 
 import org.apache.log4j.Logger;
@@ -14,10 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-*/
 /**
  * @author M.Sydorenko
- *//*
+ */
 
 public class CommandAccessFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(CommandAccessFilter.class);
@@ -47,7 +45,7 @@ public class CommandAccessFilter implements Filter {
         LOG.debug("CommandAccessFilter destruction starts");
         outOfControl.add("locale");
         outOfControl.add("login");
-        outOfControl.add("../../login.jsp");
+        outOfControl.add("openLoginPage");
         LOG.trace("List out of control: " + outOfControl);
 
         commons.add("main");
@@ -114,4 +112,4 @@ public class CommandAccessFilter implements Filter {
         return clientList;
     }
 }
-*/
+

@@ -51,7 +51,7 @@
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form class="" method="post" action="../../login.jsp">
+                    <form class="" method="post" action="viatelecom?command=openLoginPage">
                         <button class="" type="submit">
                             <fmt:message key="templates.menu.cabinet"/>
                         </button>

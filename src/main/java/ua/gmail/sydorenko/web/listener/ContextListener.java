@@ -107,6 +107,7 @@ public class ContextListener implements ServletContextListener {
         commandList.put("deleteUser", new DeleteClientCommand(addressDao, billDao, contactDao, serviceDao, tariffDao, userDao));
         commandList.put("noCommand", new NoCommand());
         commandList.put("logout", new LogoutCommand());
+        commandList.put("openLoginPage", new OpenLoginCommand());
         LOG.trace("Create list of command");
 
         CommandFactory commandFactory = new CommandFactory(commandList);
