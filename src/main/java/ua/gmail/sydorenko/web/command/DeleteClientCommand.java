@@ -20,7 +20,6 @@ public class DeleteClientCommand extends GeneralCommand {
     @Override
     public String execute(HttpServletRequest request) throws DaoSystemException {
         LOG.debug("Command 'delete client' starts");
-        UserDao userDao = new UserDaoImpl();
         int idUserForChange = Integer.parseInt(request.getParameter("idUserForChange"));
         LOG.trace("Id client for delete: " + idUserForChange);
         userDao.delete(idUserForChange);

@@ -44,9 +44,6 @@ public class UserDaoImpl implements UserDao {
     private DBManager manager;
     private Template template;
 
-    public UserDaoImpl() {
-    }
-
     public UserDaoImpl(DBManager manager, Template template) {
         this.manager = manager;
         this.template = template;

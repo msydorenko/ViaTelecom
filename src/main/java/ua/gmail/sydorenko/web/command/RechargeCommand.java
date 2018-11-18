@@ -25,6 +25,9 @@ public class RechargeCommand extends GeneralCommand {
         LOG.debug("Command 'recharge' starts");
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished");
+        if (forward.equals(Path.PAGE_ERROR)) {
+            return forward;
+        }
 
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");

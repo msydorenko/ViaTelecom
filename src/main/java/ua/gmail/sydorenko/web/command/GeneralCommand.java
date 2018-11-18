@@ -30,18 +30,29 @@ public abstract class GeneralCommand implements Command {
     }
 
     String checkResubmit(HttpServletRequest request) {
-        String forward;
         HttpSession session = request.getSession(false);
+        String command = request.getParameter("command");
+        String forward = resultPage(command);
+
         String uid = request.getParameter("uid");
         LOG.trace("Request parameter 'uid': " + uid);
 
         if (session != null && !uid.equals(session.getAttribute("uid"))) {
             session.setAttribute("uid", uid);
             LOG.trace("Set uid in the session: " + uid);
-            forward = Path.PAGE_MAIN;
         } else {
             LOG.warn("Resubmit form");
             return Path.PAGE_ERROR;
+        }
+        return forward;
+    }
+
+    private String resultPage(String command) {
+        String forward;
+        if (command.equals("createOrUpdate")) {
+            forward = Path.COMMAND_CLIENTS_LIST;
+        } else {
+            forward = Path.COMMAND_MAIN;
         }
         return forward;
     }

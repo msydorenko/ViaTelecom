@@ -13,14 +13,11 @@ public class ContactDaoImpl implements ContactDao {
     private static final String SQL_CREATE_CONTACT = "INSERT INTO viatelecom.spr_contacts (phone_number, email) VALUES (?, ?)";
     private static final String SQL_READ_ALL_CONTACTS = "SELECT phone_number, email FROM viatelecom.spr_contacts";
     private static final String SQL_READ_CONTACT_BY_ID = "SELECT id, phone_number, email FROM viatelecom.spr_contacts WHERE id = ?";
-    private static final String SQL_UPDATE_CONTACT = "UPDATE viatelecom.spr_contacts SET phone_number = ? email = ? WHERE id = ?";
+    private static final String SQL_UPDATE_CONTACT = "UPDATE viatelecom.spr_contacts SET phone_number = ?, email = ? WHERE id = ?";
     private static final String SQL_DELETE_CONTACT = "DELETE FROM viatelecom.spr_contacts WHERE id = ?";
 
     DBManager manager;
     Template template;
-
-    public ContactDaoImpl() {
-    }
 
     public ContactDaoImpl(DBManager manager, Template template) {
         this.manager = manager;
@@ -64,7 +61,7 @@ public class ContactDaoImpl implements ContactDao {
     @Override
     public void update(Contact contact) throws DaoSystemException {
         try {
-            template.executeQuery(manager, SQL_UPDATE_CONTACT, contact.getPhoneNumber(), contact.getEmail());
+            template.executeQuery(manager, SQL_UPDATE_CONTACT, contact.getPhoneNumber(), contact.getEmail(), contact.getId());
         } catch (DaoSystemException e) {
             LOG.error("Cannot update contact in table spr_contacts! ", e);
             throw new DaoSystemException("Cannot update contact in table spr_contacts! ", e);

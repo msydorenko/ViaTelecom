@@ -10,7 +10,7 @@
 <c:if test="${not empty errorMessage}">
     <div class="">${errorMessage}</div>
 </c:if>
-<form class="" method="post" action="viatelecom">
+<form name="AddOrUpdateForm" class="" method="post" action="viatelecom" onsubmit="return checkform();">
     <input type="hidden" name="command" value="createOrUpdate"/>
     <input type="hidden" name="uid" value="${Math.random()}"/>
     <c:if test="${userForUpdate != null}">
@@ -21,7 +21,7 @@
             <label><fmt:message key="admin.table.data.client.fname"/></label>
             <c:choose>
                 <c:when test="${userForUpdate != null}">
-                    <input type="text" name="fname" placeholder="<fmt:message key="admin.table.data.client.fname"/>"
+                    <input type="text"  name="fname" placeholder="<fmt:message key="admin.table.data.client.fname"/>"
                            value="${userForUpdate.first_name}" autofocus required>
                 </c:when>
                 <c:otherwise>
@@ -134,11 +134,11 @@
     <div class="">
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.phone"/> </label>
-            <input type="tel" name="phone" placeholder="380" pattern="[0-9]{12}" autofocus required>
+            <input type="tel" name="phone" placeholder="380xxxxxxxxx"  autofocus required>
         </div>
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.email"/></label>
-            <input type="email" name="email" placeholder="@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            <input type="email" name="email" placeholder="@gmail.com"
                    autofocus required>
         </div>
     </div>
@@ -159,7 +159,8 @@
         </div>
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.balance"/> </label>
-            <input type="text" name="balance" placeholder="<fmt:message key="menu.deposit.uah"/>" autofocus required>
+            <input type="number" name="balance" min=0 max = 10000
+                   placeholder="<fmt:message key="menu.deposit.uah"/>" autofocus required>
         </div>
     </div>
     <button class="" name="balance" type="submit"><fmt:message key="admin.button.user.confirm"/></button>

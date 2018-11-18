@@ -10,7 +10,6 @@ import ua.gmail.sydorenko.database.entity.User;
 import ua.gmail.sydorenko.util.SecurePassword;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author M.Sydorenko
@@ -29,29 +28,39 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         LOG.debug("Command 'create or update client' starts");
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished");
+        if (forward.equals(Path.PAGE_ERROR)) {
+            return forward;
+        }
+        String idUserForUpdate = request.getParameter("idUserForUpdate");
+        LOG.trace("idUserForUpdate: " + idUserForUpdate);
 
-        Address address = createAddress(request);
-        Contact contact = createContact(request);
-        Bill bill = createBill(request);
-        User user = createUser(request);
+        Address address = createAddress(request, idUserForUpdate);
+        Contact contact = createContact(request, idUserForUpdate);
+        Bill bill = createBill(request, idUserForUpdate);
+        User user = createUser(request, idUserForUpdate);
 
-        if ((request.getParameter("idUserForUpdate") != null) && (!request.getParameter("idUserForUpdate").isEmpty())) {
+        if (idUserForUpdate != null) {
             addressDao.update(address);
             contactDao.update(contact);
             billDao.update(bill);
             userDao.update(user);
+            LOG.trace("Update client: " + user);
         } else {
             addressDao.create(address);
             contactDao.create(contact);
             billDao.create(bill);
             userDao.create(user);
+            LOG.trace("Create client: " + user);
         }
         LOG.debug("Command 'create or update client' finished");
         return forward;
     }
 
-    private User createUser(HttpServletRequest request) {
+    private User createUser(HttpServletRequest request, String idUserForUpdate) {
         User user = new User();
+        if (idUserForUpdate != null) {
+            user.setId(Integer.parseInt(idUserForUpdate));
+        }
         user.setLogin(request.getParameter("login"));
         String password = SecurePassword.getSaltedHash(request.getParameter("password"));
         user.setPassword(password);
@@ -62,24 +71,33 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         return user;
     }
 
-    private Bill createBill(HttpServletRequest request) {
+    private Bill createBill(HttpServletRequest request, String idUserForUpdate) {
         Bill bill = new Bill();
+        if (idUserForUpdate != null) {
+            bill.setId(Integer.parseInt(idUserForUpdate));
+        }
         bill.setNumber(request.getParameter("bill"));
         bill.setValue(Integer.parseInt(request.getParameter("balance")));
         LOG.trace("Create bill: " + bill);
         return bill;
     }
 
-    private Contact createContact(HttpServletRequest request) {
+    private Contact createContact(HttpServletRequest request, String idUserForUpdate) {
         Contact contact = new Contact();
+        if (idUserForUpdate != null) {
+            contact.setId(Integer.parseInt(idUserForUpdate));
+        }
         contact.setPhoneNumber(Long.parseLong(request.getParameter("phone")));
         contact.setEmail(request.getParameter("email"));
         LOG.trace("Create contact: " + contact);
         return contact;
     }
 
-    private Address createAddress(HttpServletRequest request) {
+    private Address createAddress(HttpServletRequest request, String idUserForUpdate) {
         Address address = new Address();
+        if (idUserForUpdate != null) {
+            address.setId(Integer.parseInt(idUserForUpdate));
+        }
         address.setCountry(request.getParameter("country"));
         address.setCity(request.getParameter("city"));
         address.setStreet(request.getParameter("street"));

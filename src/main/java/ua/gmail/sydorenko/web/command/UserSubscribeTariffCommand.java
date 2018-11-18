@@ -27,6 +27,9 @@ public class UserSubscribeTariffCommand extends GeneralCommand {
 
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished ");
+        if (forward.equals(Path.PAGE_ERROR)) {
+            return forward;
+        }
 
         balanceProcessing(request);
         LOG.debug("Command 'subscribe tariff for user' successfully finished");

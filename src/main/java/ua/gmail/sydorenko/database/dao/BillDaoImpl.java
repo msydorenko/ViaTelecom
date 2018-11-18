@@ -23,9 +23,6 @@ public class BillDaoImpl implements BillDao {
     DBManager manager;
     Template template;
 
-    public BillDaoImpl() {
-    }
-
     public BillDaoImpl(DBManager manager, Template template) {
         this.manager = manager;
         this.template = template;

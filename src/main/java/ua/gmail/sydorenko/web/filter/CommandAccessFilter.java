@@ -1,3 +1,4 @@
+/*
 package ua.gmail.sydorenko.web.filter;
 
 import org.apache.log4j.Logger;
@@ -13,14 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * @author M.Sydorenko
- */
+ *//*
+
 public class CommandAccessFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(CommandAccessFilter.class);
     private Map<Role, List<String>> accessMap = new HashMap<>();
     private static List<String> commons = new ArrayList<String>();
-    private String action = "login";
+    private static List<String> outOfControl = new ArrayList<String>();
 
     public void destroy() {
         LOG.debug("CommandAccessFilter destruction starts");
@@ -42,6 +45,11 @@ public class CommandAccessFilter implements Filter {
 
     public void init(FilterConfig config) throws ServletException {
         LOG.debug("CommandAccessFilter destruction starts");
+        outOfControl.add("locale");
+        outOfControl.add("login");
+        outOfControl.add("../../login.jsp");
+        LOG.trace("List out of control: " + outOfControl);
+
         commons.add("main");
         commons.add("tariffList");
         commons.add("sort");
@@ -66,9 +74,10 @@ public class CommandAccessFilter implements Filter {
             return false;
         }
 
-        if (action.equals(commandName)) {
+        if (outOfControl.contains(commandName)) {
             return true;
         }
+
         HttpSession session = request.getSession(false);
         if (session == null) {
             return false;
@@ -105,3 +114,4 @@ public class CommandAccessFilter implements Filter {
         return clientList;
     }
 }
+*/

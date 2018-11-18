@@ -14,4 +14,5 @@
     Script for login page
     ===========================================================================--%>
     <%--<script type="text/javascript" src="js/loginJs.js"/>--%>
+    <script type="text/javascript" src="js/validateUserForm.js"></script>
 </head>
