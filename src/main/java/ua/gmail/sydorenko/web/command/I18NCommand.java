@@ -3,6 +3,7 @@ package ua.gmail.sydorenko.web.command;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
@@ -14,7 +15,7 @@ public class I18NCommand extends GeneralCommand {
     private static final Logger LOG = Logger.getLogger(I18NCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOG.debug("Command I18N starts");
         String forward = null;
         String localeToSet = request.getParameter("i18n");

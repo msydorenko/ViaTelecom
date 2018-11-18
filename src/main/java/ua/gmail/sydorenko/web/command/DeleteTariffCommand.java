@@ -5,6 +5,7 @@ import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author M.Sydorenko
@@ -18,11 +19,11 @@ public class DeleteTariffCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command delete tariff starts");
         int tariffId = Integer.parseInt(request.getParameter("tariffId"));
         LOG.trace("Id tariff: " + tariffId);
-        
+
         tariffDao.delete(tariffId);
         LOG.debug("Command successfully delete");
         return Path.COMMAND_MAIN;

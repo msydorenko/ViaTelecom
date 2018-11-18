@@ -7,6 +7,7 @@ import ua.gmail.sydorenko.database.entity.Service;
 import ua.gmail.sydorenko.database.entity.Tariff;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class MainCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'main' starts");
 
         HttpSession session = request.getSession(false);

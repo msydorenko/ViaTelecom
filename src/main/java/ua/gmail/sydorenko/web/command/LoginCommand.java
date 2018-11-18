@@ -7,6 +7,7 @@ import ua.gmail.sydorenko.database.entity.*;
 import ua.gmail.sydorenko.util.SecurePassword;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class LoginCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command starts");
         HttpSession session = request.getSession();
 

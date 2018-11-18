@@ -10,6 +10,7 @@ import ua.gmail.sydorenko.database.entity.User;
 import ua.gmail.sydorenko.util.SecurePassword;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author M.Sydorenko
@@ -24,7 +25,7 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'create or update client' starts");
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished");

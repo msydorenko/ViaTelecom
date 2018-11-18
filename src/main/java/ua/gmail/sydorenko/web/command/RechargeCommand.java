@@ -7,6 +7,7 @@ import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -21,7 +22,7 @@ public class RechargeCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'recharge' starts");
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished");

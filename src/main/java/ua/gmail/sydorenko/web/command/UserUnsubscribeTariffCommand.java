@@ -7,11 +7,12 @@ import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 import java.util.Set;
 
-public class UserUnsubscribeTariffCommand extends GeneralCommand{
+public class UserUnsubscribeTariffCommand extends GeneralCommand {
     private static final long serialVersionUID = -4568479273029386042L;
     private static final Logger LOG = Logger.getLogger(UserUnsubscribeTariffCommand.class);
 
@@ -20,7 +21,7 @@ public class UserUnsubscribeTariffCommand extends GeneralCommand{
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'unsubscribe tariff for user' starts");
         int tariffId = Integer.parseInt(request.getParameter("tariffId"));
         LOG.trace("Obtain tariff id for unsubscribe: " + tariffId);
@@ -31,9 +32,9 @@ public class UserUnsubscribeTariffCommand extends GeneralCommand{
 
         Set<Tariff> tariffs = user.getTariffs();
         Iterator<Tariff> iterator = tariffs.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Tariff next = iterator.next();
-            if(next.getId() == tariffId){
+            if (next.getId() == tariffId) {
                 iterator.remove();
             }
         }

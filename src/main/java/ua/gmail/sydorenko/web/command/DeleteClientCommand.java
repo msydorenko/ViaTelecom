@@ -5,6 +5,7 @@ import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author M.Sydorenko
@@ -18,7 +19,7 @@ public class DeleteClientCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'delete client' starts");
         int idUserForChange = Integer.parseInt(request.getParameter("idUserForChange"));
         LOG.trace("Id client for delete: " + idUserForChange);

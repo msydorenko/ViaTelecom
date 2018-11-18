@@ -5,8 +5,14 @@ import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.util.PdfCreator;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class DownloadCommand extends GeneralCommand {
@@ -14,7 +20,7 @@ public class DownloadCommand extends GeneralCommand {
     private static final Logger LOG = Logger.getLogger(DownloadCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'download tariff's list' starts");
 
         HttpSession session = request.getSession(false);
@@ -24,6 +30,22 @@ public class DownloadCommand extends GeneralCommand {
         }
         LOG.debug("Command 'download tariff's list' finished");
 
+
+        response.setContentType("application/pdf");
+        response.addHeader("Content-Disposition", "attachment; filename=" + "ViaTelecom.pdf");
+
+        try (ServletOutputStream stream = response.getOutputStream()) {
+            File fileToDownload = new File("D:\\ViaTelecom.pdf");
+            FileInputStream input = new FileInputStream(fileToDownload);
+            try (BufferedInputStream buf = new BufferedInputStream(input)) {
+                int readBytes;
+                while ((readBytes = buf.read()) != -1) {
+                    stream.write(readBytes);
+                }
+            }
+        } catch (IOException e) {
+            LOG.error("Cannot download file");
+        }
         return Path.PAGE_MAIN;
     }
 }

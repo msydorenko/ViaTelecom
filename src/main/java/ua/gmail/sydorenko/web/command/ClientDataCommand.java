@@ -6,6 +6,7 @@ import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ClientDataCommand extends GeneralCommand {
     private static final long serialVersionUID = -7092103951978477774L;
@@ -16,7 +17,7 @@ public class ClientDataCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'client data' starts");
         if (request.getParameter("idUserForChange") != null && !request.getParameter("idUserForChange").isEmpty()) {
 

@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -14,7 +15,7 @@ public class LogoutCommand extends GeneralCommand {
     private static final Logger LOG = Logger.getLogger(LogoutCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command starts");
 
         HttpSession session = request.getSession(false);

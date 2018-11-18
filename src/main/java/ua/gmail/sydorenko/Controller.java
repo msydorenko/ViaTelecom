@@ -40,7 +40,7 @@ public class Controller extends HttpServlet {
         Command command = commandFactory.getCommand(request);
         LOG.trace("Retrieve command " + command);
 
-        String forward = command.execute(request);
+        String forward = command.execute(request, response);
         LOG.trace("Forward page " + forward);
         if (forward != null || !forward.equals("")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher(forward);

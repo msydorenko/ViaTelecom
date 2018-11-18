@@ -7,6 +7,7 @@ import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.util.Sorter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,7 @@ public class SortCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'sort command' starts");
 
         String value = request.getParameter("value");

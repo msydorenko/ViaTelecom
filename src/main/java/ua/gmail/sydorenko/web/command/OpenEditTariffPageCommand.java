@@ -6,6 +6,7 @@ import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author M.Sydorenko
@@ -19,7 +20,7 @@ public class OpenEditTariffPageCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'open page to update' starts");
         int tariffId = Integer.parseInt(request.getParameter("tariffId"));
         LOG.trace("Id tariff for update --> " + tariffId);

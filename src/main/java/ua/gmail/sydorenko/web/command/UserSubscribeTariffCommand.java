@@ -8,6 +8,7 @@ import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,7 +23,7 @@ public class UserSubscribeTariffCommand extends GeneralCommand {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DaoSystemException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
         LOG.debug("Command 'subscribe tariff for user' starts");
 
         String forward = checkResubmit(request);
