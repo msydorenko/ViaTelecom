@@ -32,14 +32,8 @@ public class CommandAccessFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-
         LOG.debug("Filter starts");
-        HttpServletRequest httpServletRequest = (HttpServletRequest) req;
-        String path = httpServletRequest.getRequestURI().substring(httpServletRequest.getContextPath().length());
-        System.out.println(path);
-        System.out.println(path.startsWith("/images"));
-        if (accessAllowed(req) || path.startsWith("/images") || path.startsWith("/css") || path.startsWith("/favicon")
-                || path.startsWith("/js")) {
+        if (accessAllowed(req)) {
             LOG.debug("Filter finished");
             chain.doFilter(req, resp);
         } else {

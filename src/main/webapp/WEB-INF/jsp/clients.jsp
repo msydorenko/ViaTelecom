@@ -17,7 +17,7 @@
 </c:if>
 <div>
     <c:if test="${not empty completeUser && completeUser != null}">
-        <table>
+        <table class="tabtab">
             <tr>
                 <th><fmt:message key="admin.clients.table.fname"/></th>
                 <th><fmt:message key="admin.clients.table.lname"/></th>
@@ -37,7 +37,7 @@
 <div>
     <form class="" method="post" action="viatelecom">
         <input type="hidden" name="command" value="clientData"/>
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.button.user.add"/>
         </button>
     </form>

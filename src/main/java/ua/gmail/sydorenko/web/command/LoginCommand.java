@@ -74,7 +74,12 @@ public class LoginCommand extends GeneralCommand {
     }
 
     private User createUser(String login) throws DaoSystemException {
-        User user = userDao.readByLogin(login).get(0);
+        List<User> users = userDao.readByLogin(login);
+        User user = null;
+        if (users.size() == 0) {
+            return user;
+        }
+        user = userDao.readByLogin(login).get(0);
         int userId = user.getId();
         LOG.trace("Found in DB: user --> " + user);
 

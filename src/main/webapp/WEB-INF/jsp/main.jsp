@@ -6,33 +6,35 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 <div class="flex">
-    <a href="viatelecom?command=locale&i18n=ru&page=main">RU</a>
-    <a href="viatelecom?command=locale&i18n=en&page=main">EN</a>
+    <a href="viatelecom?command=locale&i18n=ru&page=main"><img src="images/Russia.png"/> </a>
+    <a href="viatelecom?command=locale&i18n=en&page=main"><img src="images/United-States.png"/></a>
 </div>
 <%@ include file="/WEB-INF/templates/_menu.jspf" %>
 <div>
+    <span>
     <form class="" method="post" action="viatelecom?command=tariffList">
         <input type="hidden" name="serviceId" value="1"/>
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.button.internet"/>
         </button>
     </form>
-</div>
-<div>
+    </span>
+    <span>
     <form class="" method="post" action="viatelecom?command=tariffList">
         <input type="hidden" name="serviceId" value="2"/>
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.button.tv"/>
         </button>
     </form>
-</div>
-<div>
+    </span>
+    <span>
     <form class="" method="post" action="viatelecom?command=tariffList">
         <input type="hidden" name="serviceId" value="3"/>
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.button.telephone"/>
         </button>
     </form>
+    </span>
 </div>
 
 <c:if test="${userRole.name eq 'client'}">
@@ -47,7 +49,7 @@
 </c:if>
 <div>
     <c:if test="${not empty tariffList && tariffList != null}">
-        <table>
+        <table class="tabtab">
             <tr>
                 <th class="th">
                     <div class="row">
@@ -98,7 +100,7 @@
                             <c:when test="${userRole.name eq 'admin'}">
                                 <form class="" method="post" action="viatelecom?command=openEditTariffPage">
                                     <input type="hidden" name="tariffId" value="${tariff.id}"/>
-                                    <button class="" type="submit">
+                                    <button class="myButton" type="submit">
                                         <fmt:message key="admin.button.editTariff"/>
                                     </button>
                                 </form>
@@ -115,7 +117,7 @@
                                         <form class="" method="post" action="viatelecom?command=userSubscribeTariff">
                                             <input type="hidden" name="uid" value="${Math.random()}"/>
                                             <input type="hidden" name="tariffId" value="${tariff.id}"/>
-                                            <button class="" type="submit">
+                                            <button class="myButton" type="submit">
                                                 <fmt:message key="client.button.addTariff"/>
                                             </button>
                                         </form>
@@ -123,7 +125,7 @@
                                     <c:otherwise>
                                         <form class="" method="post" action="viatelecom?command=userUnsubscribeTariff">
                                             <input type="hidden" name="tariffId" value="${tariff.id}"/>
-                                            <button class="" type="submit">
+                                            <button class="myButton" type="submit">
                                                 <fmt:message key="client.button.deleteTariff"/>
                                             </button>
                                         </form>
@@ -136,7 +138,7 @@
                         <td>
                             <form class="" method="post" action="viatelecom?command=deleteTariff">
                                 <input type="hidden" name="tariffId" value="${tariff.id}"/>
-                                <button class="" type="submit">
+                                <button class="myButton" type="submit">
                                     <fmt:message key="admin.button.deleteTariff"/>
                                 </button>
                             </form>
@@ -149,32 +151,34 @@
 </div>
 <div>
     <form class="" method="post" action="viatelecom?command=download">
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.button.download"/>
         </button>
     </form>
 </div>
 <c:if test="${userRole.name eq 'admin'}">
-    <div>
+    <div style="text-align: center">
         <form action="viatelecom" method="post">
-            <input type="hidden" name="uid" value="${Math.random()}"/>
-            <input type="hidden" name="command" value="addTariff"/>
-            <select name="service">
-                <c:forEach var="service" items="${serviceList}">
-                    <option value="${service.id}">${service.name}</option>
-                </c:forEach>
-            </select>
-            <input type="text" name="name" placeholder="Tariff name">
-            <input type="text" name="price" placeholder="Price">
-            <div>
-                <label>
-                    <fmt:message key="admin.change.tariff.description.Tariff"/>
-                </label>
-                <textarea name="description" rows="3" minlength="10" maxlength="250"
-                          placeholder="<fmt:message key="admin.change.tariff.description.placeholder"/>"
-                          required></textarea>
+            <div class="tarifForm align-items-center">
+                <input type="hidden" name="uid" value="${Math.random()}"/>
+                <input type="hidden" name="command" value="addTariff"/>
+                <select name="service">
+                    <c:forEach var="service" items="${serviceList}">
+                        <option value="${service.id}">${service.name}</option>
+                    </c:forEach>
+                </select>
+                <input type="text" name="name" placeholder="Tariff name" required>
+                <input type="number" name="price" min="0" max="1000" placeholder="Price" required>
+                <div>
+                    <label>
+                        <fmt:message key="admin.change.tariff.description.Tariff"/>
+                    </label>
+                    <textarea name="description" rows="1" cols="30" minlength="10" maxlength="250"
+                              placeholder="<fmt:message key="admin.change.tariff.description.placeholder"/>"
+                              required></textarea>
+                </div>
+                <input type="submit" class="myButton" value="<fmt:message key="admin.button.addTariff"/>"/>
             </div>
-            <input type="submit" value="<fmt:message key="admin.button.addTariff"/>"/>
         </form>
     </div>
 </c:if>

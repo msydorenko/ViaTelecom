@@ -1,4 +1,3 @@
-/*
 package ua.gmail.sydorenko.database.dao;
 
 import org.junit.Before;
@@ -51,4 +50,3 @@ public class AddTariffCommandTest {
         verify(request).getParameter("description");
     }
 }
-*/

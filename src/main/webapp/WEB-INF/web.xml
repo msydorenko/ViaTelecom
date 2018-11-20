@@ -56,7 +56,7 @@
     </filter>
     <filter-mapping>
         <filter-name>CommandAccessFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>Controller</servlet-name>
     </filter-mapping>
 
     <jsp-config>

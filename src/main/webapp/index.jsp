@@ -6,11 +6,13 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 <div class="flex">
-    <a href="viatelecom?command=locale&i18n=ru&page=index">RU</a>
-    <a href="viatelecom?command=locale&i18n=en&page=index">EN</a>
+    <a href="viatelecom?command=locale&i18n=ru&page=index"><img src="images/Russia.png"/></a>
+    <a href="viatelecom?command=locale&i18n=en&page=index"><img src="images/United-States.png"/></a>
 </div>
-<%@ include file="/WEB-INF/templates/_menu.jspf" %>
 
-<img src="images/index.jpg" alt="ViaTelecom">
+<%@ include file="/WEB-INF/templates/_menu.jspf" %>
+<div>
+    <img src="images/index.jpg" alt="ViaTelecom">
+</div>
 </body>
 </html>

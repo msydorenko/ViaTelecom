@@ -43,9 +43,7 @@ public class AddressDaoImplTest {
     @Test
     public void testReadAll() throws DaoSystemException {
         when(addressDao.readAll()).thenReturn(addressList);
-
         List<Address> list = addressDao.readAll();
-
         assertEquals(addressList, list);
     }
 

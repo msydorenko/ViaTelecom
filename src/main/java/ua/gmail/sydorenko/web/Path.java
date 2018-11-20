@@ -22,4 +22,5 @@ public interface Path {
     String COMMAND_ERROR = "viatelecom?command=error";
     String COMMAND_MAIN = "viatelecom?command=main";
     String COMMAND_CLIENTS_LIST = "viatelecom?command=usersList";
+    String COMMAND_CLIENT_DATAS = "viatelecom?command=clientData";
 }

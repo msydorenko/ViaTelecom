@@ -12,7 +12,7 @@
             <input type="hidden" name="command" value="changeUserStatus"/>
             <input type="hidden" name="action" value="unblock"/>
             <input type="hidden" name="idUserForChange" value="${client.id}"/>
-            <button class="" type="submit">
+            <button class="myButton" type="submit">
                 <fmt:message key="admin.clients.table.block"/>
             </button>
         </form>
@@ -22,7 +22,7 @@
             <input type="hidden" name="command" value="changeUserStatus"/>
             <input type="hidden" name="action" value="block"/>
             <input type="hidden" name="idUserForChange" value="${client.id}"/>
-            <button class="" type="submit">
+            <button class="myButton" type="submit">
                 <fmt:message key="admin.clients.table.active"/>
             </button>
         </form>
@@ -32,7 +32,7 @@
     <form class="" method="post" action="viatelecom">
         <input type="hidden" name="command" value="clientData"/>
         <input type="hidden" name="idUserForChange" value="${client.id}"/>
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.clients.table.user.edit"/>
         </button>
     </form>
@@ -41,7 +41,7 @@
     <form class="" method="post" action="viatelecom">
         <input type="hidden" name="command" value="deleteUser"/>
         <input type="hidden" name="idUserForChange" value="${client.id}"/>
-        <button class="" type="submit">
+        <button class="myButton" type="submit">
             <fmt:message key="admin.clients.table.user.delete"/>
         </button>
     </form>

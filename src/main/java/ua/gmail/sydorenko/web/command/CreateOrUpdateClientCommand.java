@@ -12,6 +12,7 @@ import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author M.Sydorenko
@@ -33,8 +34,12 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         if (forward.equals(Path.COMMAND_ERROR)) {
             return forward;
         }
+
         String idUserForUpdate = request.getParameter("idUserForUpdate");
         LOG.trace("idUserForUpdate: " + idUserForUpdate);
+        if (idUserForUpdate == null && existLogin(request)) {
+            return Path.PAGE_CLIENT_DATA;
+        }
 
         Address address = createAddress(request, idUserForUpdate);
         Contact contact = createContact(request, idUserForUpdate);
@@ -57,6 +62,20 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         LOG.debug("Command 'create or update client' finished");
         return forward;
     }
+
+    private boolean existLogin(HttpServletRequest request) throws DaoSystemException {
+        String errorMessage;
+        String login = request.getParameter("login");
+        List<User> users = userDao.readByLogin(login);
+        if (users.size() != 0) {
+            errorMessage = "Login exist!";
+            request.setAttribute("errorMessage", errorMessage);
+            LOG.error("errorMessage --> " + errorMessage);
+            return true;
+        }
+        return false;
+    }
+
 
     private User createUser(HttpServletRequest request, String idUserForUpdate) {
         User user = new User();

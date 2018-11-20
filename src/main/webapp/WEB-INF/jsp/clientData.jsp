@@ -9,6 +9,7 @@
 
 <c:if test="${not empty errorMessage}">
     <div class="">${errorMessage}</div>
+    <br>
 </c:if>
 <form name="AddOrUpdateForm" class="" method="post" action="viatelecom" onsubmit="return checkform();">
     <input type="hidden" name="command" value="createOrUpdate"/>
@@ -21,7 +22,7 @@
             <label><fmt:message key="admin.table.data.client.fname"/></label>
             <c:choose>
                 <c:when test="${userForUpdate != null}">
-                    <input type="text"  name="fname" placeholder="<fmt:message key="admin.table.data.client.fname"/>"
+                    <input type="text" name="fname" placeholder="<fmt:message key="admin.table.data.client.fname"/>"
                            value="${userForUpdate.first_name}" autofocus required>
                 </c:when>
                 <c:otherwise>
@@ -134,7 +135,7 @@
     <div class="">
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.phone"/> </label>
-            <input type="tel" name="phone" placeholder="380xxxxxxxxx"  autofocus required>
+            <input type="tel" name="phone" placeholder="380xxxxxxxxx" autofocus required>
         </div>
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.email"/></label>
@@ -159,7 +160,7 @@
         </div>
         <div class="">
             <label><fmt:message key="admin.table.data.client.bill.balance"/> </label>
-            <input type="number" name="balance" min=0 max = 10000
+            <input type="number" name="balance" min=0 max=10000
                    placeholder="<fmt:message key="menu.deposit.uah"/>" autofocus required>
         </div>
     </div>
