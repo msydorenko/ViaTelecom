@@ -7,8 +7,8 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
 <div>
-    <a href="viatelecom?command=locale&i18n=ru&page=main">RU</a>
-    <a href="viatelecom?command=locale&i18n=en&page=main">EN</a>
+    <a href="viatelecom?command=locale&i18n=ru&page=clients">RU</a>
+    <a href="viatelecom?command=locale&i18n=en&page=clients">EN</a>
 </div>
 <%@ include file="/WEB-INF/templates/_menu.jspf" %>
 
