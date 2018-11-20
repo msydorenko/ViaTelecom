@@ -8,9 +8,6 @@ import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.template.*;
 import ua.gmail.sydorenko.web.command.*;
 
-import javax.naming.NamingException;
-import javax.naming.ldap.Control;
-import javax.naming.ldap.ControlFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -108,6 +105,7 @@ public class ContextListener implements ServletContextListener {
         commandList.put("noCommand", new NoCommand());
         commandList.put("logout", new LogoutCommand());
         commandList.put("openLoginPage", new OpenLoginCommand());
+        commandList.put("error", new ErrorCommand());
         LOG.trace("Create list of command");
 
         CommandFactory commandFactory = new CommandFactory(commandList);

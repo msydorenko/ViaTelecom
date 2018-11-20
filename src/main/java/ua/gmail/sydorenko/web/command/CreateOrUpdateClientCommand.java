@@ -8,6 +8,7 @@ import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.entity.Contact;
 import ua.gmail.sydorenko.database.entity.User;
 import ua.gmail.sydorenko.util.SecurePassword;
+import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         LOG.debug("Command 'create or update client' starts");
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished");
-        if (forward.equals(Path.PAGE_ERROR)) {
+        if (forward.equals(Path.COMMAND_ERROR)) {
             return forward;
         }
         String idUserForUpdate = request.getParameter("idUserForUpdate");

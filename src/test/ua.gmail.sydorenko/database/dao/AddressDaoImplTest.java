@@ -1,7 +1,6 @@
 package ua.gmail.sydorenko.database.dao;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Address;
@@ -42,7 +41,7 @@ public class AddressDaoImplTest {
     }
 
     @Test
-    public void readAll() throws DaoSystemException {
+    public void testReadAll() throws DaoSystemException {
         when(addressDao.readAll()).thenReturn(addressList);
 
         List<Address> list = addressDao.readAll();
@@ -51,7 +50,7 @@ public class AddressDaoImplTest {
     }
 
   /*  @Test
-    public void readById(int i) throws DaoSystemException {
+    public void testReadById() throws DaoSystemException {
         when(addressDao.readById(address1.getId())).thenReturn(addressList);
 
         List<Address> addresses = addressDao.readById(1);

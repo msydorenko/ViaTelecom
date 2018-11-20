@@ -2,6 +2,7 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
+import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,7 +30,7 @@ public abstract class GeneralCommand implements Command {
         this.userDao = userDao;
     }
 
-    String checkResubmit(HttpServletRequest request) {
+    public String checkResubmit(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String command = request.getParameter("command");
         String forward = resultPage(command);
@@ -42,7 +43,7 @@ public abstract class GeneralCommand implements Command {
             LOG.trace("Set uid in the session: " + uid);
         } else {
             LOG.warn("Resubmit form");
-            return Path.PAGE_ERROR;
+            return Path.COMMAND_ERROR;
         }
         return forward;
     }

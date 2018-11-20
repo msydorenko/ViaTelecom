@@ -5,14 +5,14 @@
                 <c:choose>
                     <c:when test="${userRole.name eq 'admin'}">
                         <form class="" method="post" action="viatelecom?command=main">
-                            <button class="" type="submit">
+                            <button class="btn" type="submit">
                                 <fmt:message key="templates.menu.tariffs"/>
                             </button>
                         </form>
                     </c:when>
                     <c:otherwise>
                         <form class="" method="post" action="viatelecom?command=main">
-                            <button class="" type="submit">
+                            <button class="btn" type="submit">
                                 <fmt:message key="templates.menu.client.main"/>
                             </button>
                         </form>
@@ -23,7 +23,7 @@
                 <c:choose>
                     <c:when test="${userRole.name eq 'admin'}">
                         <form class="" method="post" action="viatelecom?command=usersList">
-                            <button class="" type="submit">
+                            <button class="btn" type="submit">
                                 <fmt:message key="templates.menu.users"/>
                             </button>
                         </form>
@@ -31,9 +31,10 @@
                     <c:otherwise>
                         <form class="" method="post" action="viatelecom?command=recharge">
                             <input type="hidden" name="uid" value="${Math.random()}"/>
-                            <input type="number" name="newBalance" placeholder="<fmt:message key="menu.deposit.uah"/>"
+                            <input type="number" name="newBalance"
+                                   placeholder="<fmt:message key="menu.deposit.uah"/>"
                                    min=0 max="5000" required/>
-                            <button class="" type="submit">
+                            <button class="btn" type="submit">
                                 <fmt:message key="templates.menu.client.deposit"/>
                             </button>
                         </form>
@@ -45,14 +46,14 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <form class="" method="post" action="viatelecom?command=logout">
-                        <button class="" type="submit">
+                        <button class="btn2" type="submit">
                             <fmt:message key="templates.menu.logout"/>
                         </button>
                     </form>
                 </c:when>
                 <c:otherwise>
                     <form class="" method="post" action="viatelecom?command=openLoginPage">
-                        <button class="" type="submit">
+                        <button class="btn2" type="submit">
                             <fmt:message key="templates.menu.cabinet"/>
                         </button>
                     </form>

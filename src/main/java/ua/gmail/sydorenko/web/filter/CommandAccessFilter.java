@@ -2,7 +2,7 @@ package ua.gmail.sydorenko.web.filter;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.entity.Role;
-import ua.gmail.sydorenko.web.command.Path;
+import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +16,7 @@ import java.util.Map;
 /**
  * @author M.Sydorenko
  */
+
 
 public class CommandAccessFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(CommandAccessFilter.class);
@@ -31,21 +32,28 @@ public class CommandAccessFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+
         LOG.debug("Filter starts");
-        if (accessAllowed(req)) {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) req;
+        String path = httpServletRequest.getRequestURI().substring(httpServletRequest.getContextPath().length());
+        System.out.println(path);
+        System.out.println(path.startsWith("/images"));
+        if (accessAllowed(req) || path.startsWith("/images") || path.startsWith("/css") || path.startsWith("/favicon")
+                || path.startsWith("/js")) {
             LOG.debug("Filter finished");
             chain.doFilter(req, resp);
         } else {
             LOG.warn("Access isn't alowed");
-            req.getRequestDispatcher(Path.PAGE_ERROR).forward(req, resp);
+            req.getRequestDispatcher(Path.COMMAND_ERROR).forward(req, resp);
         }
     }
 
     public void init(FilterConfig config) throws ServletException {
-        LOG.debug("CommandAccessFilter destruction starts");
+        LOG.debug("CommandAccessFilter init starts");
         outOfControl.add("locale");
         outOfControl.add("login");
         outOfControl.add("openLoginPage");
+        outOfControl.add("error");
         LOG.trace("List out of control: " + outOfControl);
 
         commons.add("main");
@@ -60,7 +68,7 @@ public class CommandAccessFilter implements Filter {
         accessMap.put(Role.ADMIN, adminList());
         accessMap.put(Role.CLIENT, clientList());
         LOG.trace("Access map: " + accessMap);
-        LOG.debug("CommandAccessFilter destruction finished");
+        LOG.debug("CommandAccessFilter init finished");
     }
 
     private boolean accessAllowed(ServletRequest req) {

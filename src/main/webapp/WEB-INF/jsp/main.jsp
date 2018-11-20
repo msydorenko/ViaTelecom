@@ -5,7 +5,7 @@
 <c:set var="title" value="ViaTelecom" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
-<div>
+<div class="flex">
     <a href="viatelecom?command=locale&i18n=ru&page=main">RU</a>
     <a href="viatelecom?command=locale&i18n=en&page=main">EN</a>
 </div>
@@ -49,25 +49,29 @@
     <c:if test="${not empty tariffList && tariffList != null}">
         <table>
             <tr>
-                <th>
-                    <fmt:message key="table.tariff.name"/>
-                    <form method="post" action="viatelecom?command=sort">
-                        <select onchange="submit()" name="value">
-                            <option>sort</option>
-                            <option value="az"><fmt:message key="table.tariff.az"/></option>
-                            <option value="za"><fmt:message key="table.tariff.za"/></option>
-                        </select>
-                    </form>
+                <th class="th">
+                    <div class="row">
+                        <fmt:message key="table.tariff.name"/>
+                        <form method="post" action="viatelecom?command=sort">
+                            <select onchange="submit()" name="value">
+                                <option>sort</option>
+                                <option value="az"><fmt:message key="table.tariff.az"/></option>
+                                <option value="za"><fmt:message key="table.tariff.za"/></option>
+                            </select>
+                        </form>
+                    </div>
                 </th>
-                <th>
-                    <fmt:message key="table.tariff.price"/>
-                    <form method="post" action="viatelecom?command=sort">
-                        <select onchange="submit()" name="value">
-                            <option>sort</option>
-                            <option value="min"><fmt:message key="table.tariff.min"/></option>
-                            <option value="max"><fmt:message key="table.tariff.max"/></option>
-                        </select>
-                    </form>
+                <th class="th">
+                    <div class="row">
+                        <fmt:message key="table.tariff.price"/>
+                        <form method="post" action="viatelecom?command=sort">
+                            <select onchange="submit()" name="value">
+                                <option>sort</option>
+                                <option value="min"><fmt:message key="table.tariff.min"/></option>
+                                <option value="max"><fmt:message key="table.tariff.max"/></option>
+                            </select>
+                        </form>
+                    </div>
                 </th>
                 <th><fmt:message key="table.tariff.description"/></th>
                 <th>

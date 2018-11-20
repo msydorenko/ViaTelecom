@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
 import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
+import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class AddTariffCommand extends GeneralCommand {
         LOG.debug("Command 'add tariff' starts");
         String forward = checkResubmit(request);
         LOG.trace("Check is successfully finished");
-        if (forward.equals(Path.PAGE_ERROR)) {
+        if (forward.equals(Path.COMMAND_ERROR)) {
             return forward;
         }
 

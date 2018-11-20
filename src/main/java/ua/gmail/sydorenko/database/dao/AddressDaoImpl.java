@@ -26,9 +26,6 @@ public class AddressDaoImpl implements AddressDao {
     DBManager manager;
     Template template;
 
-    public AddressDaoImpl() {
-    }
-
     public AddressDaoImpl(DBManager manager, Template template) {
         this.manager = manager;
         this.template = template;

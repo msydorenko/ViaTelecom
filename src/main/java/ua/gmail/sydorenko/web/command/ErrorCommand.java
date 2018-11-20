@@ -7,16 +7,13 @@ import ua.gmail.sydorenko.web.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * @author M.Sydorenko
- */
-public class NoCommand extends GeneralCommand {
-    private static final long serialVersionUID = 4272101993597627486L;
-    private static final Logger LOG = Logger.getLogger(NoCommand.class);
+public class ErrorCommand extends GeneralCommand {
+    private static final long serialVersionUID = 969313750722127938L;
+    private static final Logger LOG = Logger.getLogger(ErrorCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws DaoSystemException {
-        LOG.debug("No command");
-        return Path.COMMAND_ERROR;
+        LOG.trace("Return error page");
+        return Path.PAGE_ERROR;
     }
 }
