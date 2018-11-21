@@ -1,5 +1,10 @@
-package ua.gmail.sydorenko.database.dao.exception;
+package ua.gmail.sydorenko.database.exception;
 
+/**
+ * Dao Exception.
+ *
+ * @author M.Sydorenko
+ */
 public class DaoException extends Exception {
     public DaoException(String message) {
         super(message);

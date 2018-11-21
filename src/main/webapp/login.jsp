@@ -1,23 +1,12 @@
 <%@ include file="/WEB-INF/jspf/directive.jspf" %>
 <%@ include file="/WEB-INF/jspf/taglib.jspf" %>
-
-
-
-<html lang="en" >
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CSS Cube Login Form</title>
-
-
-
+    <title>Login</title>
     <link rel="stylesheet" href="css/style1.css">
-
-
 </head>
-
 <body>
-
 <form autocomplete='off' class='form' action="viatelecom" method="post">
     <input type="hidden" name="command" value="login"/>
     <div class='control'>
@@ -54,21 +43,30 @@
             <div class='bg-inner'></div>
         </div>
     </div>
-    <input type="submit" class='btn block-cube block-cube-hover' value="<fmt:message key="login.button.login"/>" >
-        <div class='bg-top'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg-right'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg'>
-            <div class='bg-inner'></div>
-        </div>
+    <input type="submit" class='btn block-cube block-cube-hover' value="<fmt:message key="login.button.login"/>">
+    <div class='bg-top'>
+        <div class='bg-inner'></div>
+    </div>
+    <div class='bg-right'>
+        <div class='bg-inner'></div>
+    </div>
+    <div class='bg'>
+        <div class='bg-inner'></div>
+    </div>
     </input>
 </form>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 <%--

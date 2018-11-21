@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+/**
+ * @author M.Sydorenko
+ */
 public class ContactTemplate extends Template<Contact> {
     @Override
     public Contact getResultRow(ResultSet resultSet) throws SQLException {

@@ -15,10 +15,6 @@ public interface Path {
     String PAGE_CLIENT_DATA = "/WEB-INF/jsp/clientData.jsp";
     String PAGE_ERROR = "/error.jsp";
 
-/*
-    String PAGE_CLIENT_DATA = "/WEB-INF/jsp/editClient!!!.jsp";
-*/
-
     String COMMAND_ERROR = "viatelecom?command=error";
     String COMMAND_MAIN = "viatelecom?command=main";
     String COMMAND_CLIENTS_LIST = "viatelecom?command=usersList";

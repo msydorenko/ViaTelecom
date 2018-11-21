@@ -3,6 +3,8 @@ package ua.gmail.sydorenko.database.entity;
 import java.util.Objects;
 
 /**
+ * Entity of contact.
+ *
  * @author M.Sydorenko
  */
 public class Contact extends Entity {
@@ -48,6 +50,11 @@ public class Contact extends Entity {
         return 37 * result + ((int) (phoneNumber ^ (phoneNumber >>> 32))) + email.hashCode();
     }
 
+    /**
+     * String representation if contact object.
+     *
+     * @return contact information.
+     */
     @Override
     public String toString() {
         return "Contact{" +

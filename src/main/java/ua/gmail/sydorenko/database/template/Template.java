@@ -1,13 +1,15 @@
 package ua.gmail.sydorenko.database.template;
 
 import ua.gmail.sydorenko.database.DBManager;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Entity;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 /**
+ * Class for processing SQL queries.
+ *
  * @author M.Sydorenko
  */
 public abstract class Template<T extends Entity> {
@@ -78,6 +80,13 @@ public abstract class Template<T extends Entity> {
         return list;
     }
 
+    /**
+     * Set parameter in query.
+     *
+     * @param ps SQL statement for update.
+     * @param values to set in SQL query.
+     * @throws SQLException
+     */
     private void setParamInQuery(PreparedStatement ps, Object... values) throws SQLException {
         for (int i = 0; i < values.length; i++) {
             ps.setObject(i + 1, values[i]);
@@ -106,5 +115,12 @@ public abstract class Template<T extends Entity> {
         return nextId;
     }
 
+    /**
+     * Return result row from data base.
+     *
+     * @param resultSet
+     * @return
+     * @throws SQLException
+     */
     public abstract T getResultRow(ResultSet resultSet) throws SQLException;
 }

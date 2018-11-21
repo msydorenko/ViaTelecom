@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
 /**
+ * Command for changing the local language between english and russian.
+ *
  * @author M.Sydorenko
  */
 public class I18NCommand extends GeneralCommand {

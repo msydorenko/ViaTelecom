@@ -3,6 +3,8 @@ package ua.gmail.sydorenko.database.entity;
 import java.util.Objects;
 
 /**
+ * Entity of bill.
+ *
  * @author M.Sydorenko
  */
 public class Bill extends Entity {
@@ -47,6 +49,11 @@ public class Bill extends Entity {
         return 37 * result + number.hashCode();
     }
 
+    /**
+     * String representation if bill object.
+     *
+     * @return bill information.
+     */
     @Override
     public String toString() {
         return "Bill{" +

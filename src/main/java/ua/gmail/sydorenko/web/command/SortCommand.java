@@ -2,8 +2,8 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.util.Sorter;
 import ua.gmail.sydorenko.web.Path;
 
@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Implementation of sorting commands and sending a sorted list to a jsp page.
+ *
  * @author M.Sydorenko
  */
 public class SortCommand extends GeneralCommand {

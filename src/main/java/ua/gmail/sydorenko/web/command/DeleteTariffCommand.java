@@ -2,13 +2,15 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Command for deleting tariff from database by id.
+ *
  * @author M.Sydorenko
  */
 public class DeleteTariffCommand extends GeneralCommand {

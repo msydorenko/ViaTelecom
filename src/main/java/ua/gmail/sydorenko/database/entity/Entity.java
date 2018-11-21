@@ -3,6 +3,8 @@ package ua.gmail.sydorenko.database.entity;
 import java.io.Serializable;
 
 /**
+ * Parent abstract class for all entities.
+ *
  * @author M.Sydorenko
  */
 public abstract class Entity implements Serializable {

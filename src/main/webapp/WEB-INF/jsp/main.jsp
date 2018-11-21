@@ -10,9 +10,9 @@
     <a href="viatelecom?command=locale&i18n=en&page=main"><img src="images/United-States.png"/></a>
 </div>
 <%@ include file="/WEB-INF/templates/_menu.jspf" %>
-<div>
+<div style="margin: 10px">
     <span>
-    <form class="" method="post" action="viatelecom?command=tariffList">
+    <form method="post" action="viatelecom?command=tariffList">
         <input type="hidden" name="serviceId" value="1"/>
         <button class="myButton" type="submit">
             <fmt:message key="admin.button.internet"/>
@@ -20,7 +20,7 @@
     </form>
     </span>
     <span>
-    <form class="" method="post" action="viatelecom?command=tariffList">
+    <form method="post" action="viatelecom?command=tariffList">
         <input type="hidden" name="serviceId" value="2"/>
         <button class="myButton" type="submit">
             <fmt:message key="admin.button.tv"/>
@@ -28,7 +28,7 @@
     </form>
     </span>
     <span>
-    <form class="" method="post" action="viatelecom?command=tariffList">
+    <form method="post" action="viatelecom?command=tariffList">
         <input type="hidden" name="serviceId" value="3"/>
         <button class="myButton" type="submit">
             <fmt:message key="admin.button.telephone"/>
@@ -149,35 +149,30 @@
         </table>
     </c:if>
 </div>
-<div>
-    <form class="" method="post" action="viatelecom?command=download">
+<div style="margin: 10px">
+    <form method="post" action="viatelecom?command=download">
         <button class="myButton" type="submit">
             <fmt:message key="admin.button.download"/>
         </button>
     </form>
 </div>
 <c:if test="${userRole.name eq 'admin'}">
-    <div style="text-align: center">
+    <div style="text-align: center; margin: 10px">
         <form action="viatelecom" method="post">
             <div class="tarifForm align-items-center">
                 <input type="hidden" name="uid" value="${Math.random()}"/>
                 <input type="hidden" name="command" value="addTariff"/>
-                <select name="service">
+                <select style="margin: 10px" name="service">
                     <c:forEach var="service" items="${serviceList}">
                         <option value="${service.id}">${service.name}</option>
                     </c:forEach>
                 </select>
-                <input type="text" name="name" placeholder="Tariff name" required>
-                <input type="number" name="price" min="0" max="1000" placeholder="Price" required>
-                <div>
-                    <label>
-                        <fmt:message key="admin.change.tariff.description.Tariff"/>
-                    </label>
-                    <textarea name="description" rows="1" cols="30" minlength="10" maxlength="250"
-                              placeholder="<fmt:message key="admin.change.tariff.description.placeholder"/>"
-                              required></textarea>
-                </div>
-                <input type="submit" class="myButton" value="<fmt:message key="admin.button.addTariff"/>"/>
+                <input style="margin: 10px" type="text" name="name" placeholder="Tariff name" required>
+                <input style="margin: 10px" type="number" name="price" min="0" max="1000" placeholder="Price" required>
+                <input style="margin: 10px" type="text" name="description"
+                       placeholder="<fmt:message key="admin.change.tariff.description.Tariff"/>" required>
+                <input style="margin: 10px" type="submit" class="myButton"
+                       value="<fmt:message key="admin.button.addTariff"/>"/>
             </div>
         </form>
     </div>

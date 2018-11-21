@@ -24,7 +24,7 @@ a {
 .btn, .btn2 {
     border: none;
     cursor: pointer;
-    width: 100px;
+    width: 120px;
     height: 40px;
     background: #005cbf;
     color: #fff;
@@ -51,7 +51,6 @@ a {
 
 nav {
     display: flex;
-    /*justify-content: space-between;*/
     min-height: 65px;
 }
 
@@ -65,6 +64,10 @@ nav {
 
 span form {
     display: inline-block;
+}
+
+.top-btn div {
+    margin: 10px;
 }
 
 .navbar-light .navbar-brand {
@@ -117,7 +120,7 @@ span form {
     height: 65px;
 }
 
-.tarifForm{
+.tarifForm {
     text-align: center;
     align-items: center;
     align-content: center;
@@ -128,6 +131,7 @@ span form {
     margin-right: -5px;
     margin-left: -5px;
 }
+
 .form-row {
     display: -ms-flexbox;
     display: flex;
@@ -136,11 +140,13 @@ span form {
     margin-right: -5px;
     margin-left: -5px;
 }
+
 .align-items-center {
-    -ms-flex-align: center !important;
-    align-items: center !important;
+    -ms-flex-align: center;
+    align-items: center;
 }
-#container{
+
+#container {
     position: absolute;
     top: 0;
     left: 0;
@@ -150,51 +156,57 @@ span form {
     width: 260px;
     height: 260px;
     border-radius: 5px;
-    background: rgba(3,3,3,0.25);
+    background: rgba(3, 3, 3, 0.25);
     box-shadow: 1px 1px 50px #000;
     display: none;
 }
 
 .border {
-    border: 1px solid #dee2e6 !important;
+    border: 1px solid #dee2e6;
 }
-.tabtab td{
+
+.tabtab td {
     border: solid;
     border-color: #dee2e6;
     background-color: #79BBFF;
     height: 140%;
 
-
 }
+
 .tabtab tr {
     border: solid;
     border-color: #282b81;
 }
-.tabtab  {
 
+.tabtab {
     width: 100%;
-
 }
+
 .table {
     border-collapse: collapse !important;
 }
+
 .table td,
 .table tr {
     background-color: #fff !important;
 }
+
 .table-bordered tr,
 .table-bordered td {
-    border: 1px solid #dee2e6 !important;
+    border: 1px solid #dee2e6;
 }
+
 .table-dark {
     color: inherit;
 }
+
 .table-dark tr,
 .table-dark td,
 .table-dark thead tr,
 .table-dark tbody + tbody {
     border-color: #dee2e6;
 }
+
 .table .thead-dark tr {
     color: inherit;
     border-color: #dee2e6;

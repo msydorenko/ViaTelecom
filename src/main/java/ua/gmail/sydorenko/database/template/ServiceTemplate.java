@@ -7,6 +7,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * @author M.Sydorenko
+ */
 public class ServiceTemplate extends Template<Service> {
 
     @Override

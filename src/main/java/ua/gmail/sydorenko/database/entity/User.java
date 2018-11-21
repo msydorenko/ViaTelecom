@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * Entity of user.
+ *
  * @author M.Sydorenko
  */
 public class User extends Entity {
@@ -122,6 +124,11 @@ public class User extends Entity {
         return 37 * result + login.hashCode();
     }
 
+    /**
+     * String representation if user object.
+     *
+     * @return user information.
+     */
     @Override
     public String toString() {
         return "User{" +

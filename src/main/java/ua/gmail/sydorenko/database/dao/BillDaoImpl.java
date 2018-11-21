@@ -2,14 +2,15 @@ package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.DBManager;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Bill;
-import ua.gmail.sydorenko.database.template.BillTemplate;
 import ua.gmail.sydorenko.database.template.Template;
 
 import java.util.List;
 
 /**
+ * Data access object for bill related entities.
+ *
  * @author M.Sydorenko
  */
 public class BillDaoImpl implements BillDao {
@@ -23,11 +24,23 @@ public class BillDaoImpl implements BillDao {
     DBManager manager;
     Template template;
 
+    /**
+     * Constructor for BillDaoImpl class to initialize DBManager and Template fields.
+     *
+     * @param manager connection to database
+     * @param template object for executing SQL queries.
+     */
     public BillDaoImpl(DBManager manager, Template template) {
         this.manager = manager;
         this.template = template;
     }
 
+    /**
+     * Get all bills.
+     *
+     * @return list of all addresses.
+     * @throws DaoSystemException
+     */
     @Override
     public List<Bill> readAll() throws DaoSystemException {
         List<Bill> listBills;
@@ -40,6 +53,13 @@ public class BillDaoImpl implements BillDao {
         return listBills;
     }
 
+    /**
+     * Return list of bills by id.
+     *
+     * @param id of entity object.
+     * @return list of bills by id.
+     * @throws DaoSystemException
+     */
     @Override
     public List<Bill> readById(int id) throws DaoSystemException {
         List<Bill> listBills;
@@ -52,6 +72,12 @@ public class BillDaoImpl implements BillDao {
         return listBills;
     }
 
+    /**
+     * Add new bill entity to data base.
+     *
+     * @param bill bill entity.
+     * @throws DaoSystemException
+     */
     @Override
     public void create(Bill bill) throws DaoSystemException {
         try {
@@ -62,6 +88,12 @@ public class BillDaoImpl implements BillDao {
         }
     }
 
+    /**
+     * Update existing bill in data base.
+     *
+     * @param bill Bill entity to update.
+     * @throws DaoSystemException
+     */
     @Override
     public void update(Bill bill) throws DaoSystemException {
         try {
@@ -72,6 +104,12 @@ public class BillDaoImpl implements BillDao {
         }
     }
 
+    /**
+     * Delete bill from data base with id.
+     *
+     * @param id of entity for deleting.
+     * @throws DaoSystemException
+     */
     @Override
     public void delete(int id) throws DaoSystemException {
         try {

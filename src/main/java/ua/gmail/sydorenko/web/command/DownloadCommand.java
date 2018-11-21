@@ -1,8 +1,8 @@
 package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.util.PdfCreator;
 import ua.gmail.sydorenko.web.Path;
 
@@ -16,6 +16,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Command for download a list of tariffs.
+ *
+ * @author M.Sydorenko
+ */
 public class DownloadCommand extends GeneralCommand {
     private static final long serialVersionUID = -5868243282075555305L;
     private static final Logger LOG = Logger.getLogger(DownloadCommand.class);

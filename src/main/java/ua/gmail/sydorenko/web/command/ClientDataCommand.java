@@ -2,13 +2,18 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.User;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Command to prepare information for changing a client or open a form to create one.
+ *
+ * @author M.Sydorenko
+ */
 public class ClientDataCommand extends GeneralCommand {
     private static final long serialVersionUID = -7092103951978477774L;
     private static final Logger LOG = Logger.getLogger(ClientDataCommand.class);

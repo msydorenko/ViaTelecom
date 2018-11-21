@@ -3,6 +3,8 @@ package ua.gmail.sydorenko.database.entity;
 import java.util.Objects;
 
 /**
+ * Entity of address.
+ *
  * @author M.Sydorenko
  */
 public class Address extends Entity {
@@ -79,6 +81,11 @@ public class Address extends Entity {
                 + house + flat;
     }
 
+    /**
+     * String representation if address object.
+     *
+     * @return address information.
+     */
     @Override
     public String toString() {
         return "Address{" +

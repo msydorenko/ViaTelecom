@@ -12,7 +12,7 @@
 
 <%@ include file="/WEB-INF/templates/_menu.jspf" %>
 <div>
-    <img src="images/index.jpg" alt="ViaTelecom">
+    <img src="images/index1.jpg" alt="ViaTelecom">
 </div>
 </body>
 </html>

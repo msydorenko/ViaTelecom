@@ -1,6 +1,8 @@
 package ua.gmail.sydorenko.database.entity;
 
 /**
+ * Enum representation of role.
+ *
  * @author M.Sydorenko
  */
 public enum Role {

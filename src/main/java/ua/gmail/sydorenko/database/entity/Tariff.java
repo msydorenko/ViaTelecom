@@ -3,6 +3,8 @@ package ua.gmail.sydorenko.database.entity;
 import java.util.Objects;
 
 /**
+ * Entity of tariff.
+ *
  * @author M.Sydorenko
  */
 public class Tariff extends Entity {
@@ -63,6 +65,11 @@ public class Tariff extends Entity {
         return 37 * result + name.hashCode() + price;
     }
 
+    /**
+     * String representation if tariff object.
+     *
+     * @return tariff information.
+     */
     @Override
     public String toString() {
         return "Tariff{" +

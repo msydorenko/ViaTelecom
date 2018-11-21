@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+/**
+ * @author M.Sydorenko
+ */
 public class AddressTemplate extends Template<Address> {
 
     @Override

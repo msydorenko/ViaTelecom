@@ -2,8 +2,8 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.*;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.util.SecurePassword;
 import ua.gmail.sydorenko.web.Path;
 
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
+ * Command for login a user or administrator. Validate the login and password and return to login page if user type an error.
+ *
  * @author M.Sydorenko
  */
 public class LoginCommand extends GeneralCommand {
@@ -62,6 +64,14 @@ public class LoginCommand extends GeneralCommand {
         return forward;
     }
 
+    /**
+     * Fill fields for error message.
+     *
+     * @param request
+     * @param login    user login.
+     * @param password user password.
+     * @return
+     */
     private boolean fillFields(HttpServletRequest request, String login, String password) {
         String errorMessage;
         if (login == null || password == null || password.equals("") || login.equals("")) {
@@ -73,6 +83,13 @@ public class LoginCommand extends GeneralCommand {
         return false;
     }
 
+    /**
+     * Create user using a login from the html form.
+     *
+     * @param login user login.
+     * @return user entity.
+     * @throws DaoSystemException
+     */
     private User createUser(String login) throws DaoSystemException {
         List<User> users = userDao.readByLogin(login);
         User user = null;

@@ -2,11 +2,11 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Address;
 import ua.gmail.sydorenko.database.entity.Bill;
 import ua.gmail.sydorenko.database.entity.Contact;
 import ua.gmail.sydorenko.database.entity.User;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.util.SecurePassword;
 import ua.gmail.sydorenko.web.Path;
 
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
+ * Class for creating or updating a client. Information comes from html form, and send to database.
+ *
  * @author M.Sydorenko
  */
 public class CreateOrUpdateClientCommand extends GeneralCommand {
@@ -63,6 +65,13 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         return forward;
     }
 
+    /**
+     * Check if current login exist in database.
+     *
+     * @param request
+     * @return
+     * @throws DaoSystemException
+     */
     private boolean existLogin(HttpServletRequest request) throws DaoSystemException {
         String errorMessage;
         String login = request.getParameter("login");
@@ -77,6 +86,13 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
     }
 
 
+    /**
+     * Create user using information from html form.
+     *
+     * @param request
+     * @param idUserForUpdate
+     * @return
+     */
     private User createUser(HttpServletRequest request, String idUserForUpdate) {
         User user = new User();
         if (idUserForUpdate != null) {
@@ -92,6 +108,13 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         return user;
     }
 
+    /**
+     * Create a bill object for a user.
+     *
+     * @param request
+     * @param idUserForUpdate
+     * @return
+     */
     private Bill createBill(HttpServletRequest request, String idUserForUpdate) {
         Bill bill = new Bill();
         if (idUserForUpdate != null) {
@@ -103,6 +126,13 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         return bill;
     }
 
+    /**
+     * Create contact for user.
+     *
+     * @param request
+     * @param idUserForUpdate
+     * @return
+     */
     private Contact createContact(HttpServletRequest request, String idUserForUpdate) {
         Contact contact = new Contact();
         if (idUserForUpdate != null) {
@@ -114,6 +144,13 @@ public class CreateOrUpdateClientCommand extends GeneralCommand {
         return contact;
     }
 
+    /**
+     * Create address for user.
+     *
+     * @param request
+     * @param idUserForUpdate
+     * @return
+     */
     private Address createAddress(HttpServletRequest request, String idUserForUpdate) {
         Address address = new Address();
         if (idUserForUpdate != null) {

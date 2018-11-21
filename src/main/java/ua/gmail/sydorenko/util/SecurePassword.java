@@ -1,5 +1,7 @@
 package ua.gmail.sydorenko.util;
 
+import org.apache.commons.codec.binary.Base64;
+
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -7,9 +9,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
-import org.apache.commons.codec.binary.Base64;
-
 /**
+ * Class to secure password in database.
+ *
  * @author M.Sydorenko
  */
 public class SecurePassword {
@@ -47,6 +49,13 @@ public class SecurePassword {
         return hashOfInput.equals(saltAndHash[1]);
     }
 
+    /**
+     * Hash password.
+     *
+     * @param password
+     * @param salt
+     * @return
+     */
     private static String hash(String password, byte[] salt) {
         if (password == null || password.length() == 0)
             throw new IllegalArgumentException("Empty passwords are not supported.");

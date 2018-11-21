@@ -5,6 +5,8 @@ import ua.gmail.sydorenko.database.entity.Tariff;
 import java.util.Comparator;
 
 /**
+ * Different sorting for tariff entities.
+ *
  * @author M.Sydorenko
  */
 public class Sorter {

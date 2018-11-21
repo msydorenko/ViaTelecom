@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import ua.gmail.sydorenko.database.DBManager;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.template.Template;
 import ua.gmail.sydorenko.web.command.AddTariffCommand;
 import ua.gmail.sydorenko.web.Path;

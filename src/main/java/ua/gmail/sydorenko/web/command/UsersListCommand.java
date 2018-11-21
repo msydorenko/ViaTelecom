@@ -2,8 +2,8 @@ package ua.gmail.sydorenko.web.command;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.dao.*;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.User;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.web.Path;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Command for preparing a list of user and sending it to the request.
+ *
  * @author M.Sydorenko
  */
 public class UsersListCommand extends GeneralCommand {

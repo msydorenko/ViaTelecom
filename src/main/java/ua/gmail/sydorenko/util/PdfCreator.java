@@ -13,9 +13,19 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Class to create a pdf file of all tariffs.
+ *
+ * @author M.Sydorenko
+ */
 public class PdfCreator {
     private static final Logger LOG = Logger.getLogger(PdfCreator.class);
 
+    /**
+     * Create and download pdf file of all tariffs.
+     *
+     * @param tariffList list of tariffs.
+     */
     public static void downloadTariffs(List<Tariff> tariffList) {
         LOG.debug("Start create pdf file");
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
@@ -57,6 +67,12 @@ public class PdfCreator {
         LOG.debug("Finish create pdf file");
     }
 
+    /**
+     * Add table header to pdf table.
+     *
+     * @param table pdf table.
+     * @param font
+     */
     private static void addTableHeader(PdfPTable table, BaseFont font) {
         Stream.of("Name", "Price", "Description")
                 .forEach(columnTitle -> {
@@ -68,6 +84,13 @@ public class PdfCreator {
                 });
     }
 
+    /**
+     * Add row to table in pdf.
+     *
+     * @param table
+     * @param calibri
+     * @param tariffList
+     */
     private static void addRows(PdfPTable table, BaseFont calibri, List<Tariff> tariffList) {
         tariffList.forEach(tariff -> {
             table.addCell(new Phrase(tariff.getName(), new Font(calibri, 14)));

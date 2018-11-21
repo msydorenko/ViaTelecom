@@ -3,6 +3,8 @@ package ua.gmail.sydorenko.database.entity;
 import java.util.Objects;
 
 /**
+ * Entity of service.
+ *
  * @author M.Sydorenko
  */
 public class Service extends Entity {
@@ -35,6 +37,11 @@ public class Service extends Entity {
         return 37 * result + (name.hashCode());
     }
 
+    /**
+     * String representation if service object.
+     *
+     * @return service information.
+     */
     @Override
     public String toString() {
         return "Service{" +

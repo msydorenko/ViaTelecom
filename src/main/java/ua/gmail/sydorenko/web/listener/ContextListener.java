@@ -13,6 +13,11 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.util.*;
 
+/**
+ * Listener for initialization of DBManager, DAO, logger, command factory and internationalization.
+ *
+ * @author M.Sydorenko
+ */
 public class ContextListener implements ServletContextListener {
     private final static Logger LOG = Logger.getLogger(ContextListener.class);
     private AddressDao addressDao;
@@ -69,6 +74,9 @@ public class ContextListener implements ServletContextListener {
         LOG.debug("I18N subsystem initialization finished");
     }
 
+    /**
+     * Initialize DAO.
+     */
     private void initDao() {
         LOG.trace("DAO initialisation start");
         DBManager manager = new MySQLManager();
@@ -81,6 +89,11 @@ public class ContextListener implements ServletContextListener {
         LOG.debug("DAO initialization finished");
     }
 
+    /**
+     * Initialize command factory.
+     *
+     * @param servletContext
+     */
     private void initCommandFactory(ServletContext servletContext) {
         LOG.trace("CommandFactory initialisation start");
         Map<String, Command> commandList = new HashMap<>();

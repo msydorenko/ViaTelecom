@@ -1,17 +1,18 @@
 package ua.gmail.sydorenko.database;
 
 import org.apache.log4j.Logger;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
-
-import javax.sql.DataSource;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
+ * Establish connection to MySql database.
+ *
  * @author M.Sydorenko
  */
 public class MySQLManager implements DBManager {

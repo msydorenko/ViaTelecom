@@ -2,7 +2,7 @@ package ua.gmail.sydorenko.database.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Address;
 
 import java.util.ArrayList;

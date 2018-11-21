@@ -7,6 +7,11 @@ import ua.gmail.sydorenko.web.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Abstract class, that contains commands for checking the resubmit of the forms and for opening a main page.
+ *
+ * @author M.Sydorenko
+ */
 public abstract class GeneralCommand implements Command {
     private static final long serialVersionUID = 3035771318660706686L;
     private static final Logger LOG = Logger.getLogger(GeneralCommand.class);
@@ -30,6 +35,12 @@ public abstract class GeneralCommand implements Command {
         this.userDao = userDao;
     }
 
+    /**
+     * Check the resubmit.
+     *
+     * @param request
+     * @return
+     */
     public String checkResubmit(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String command = request.getParameter("command");
@@ -48,6 +59,12 @@ public abstract class GeneralCommand implements Command {
         return forward;
     }
 
+    /**
+     * depending of the command open a main page or a page, that contains information about all clients.
+     *
+     * @param command command from request.
+     * @return
+     */
     private String resultPage(String command) {
         String forward;
         if (command.equals("createOrUpdate")) {

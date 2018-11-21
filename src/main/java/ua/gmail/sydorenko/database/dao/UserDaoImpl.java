@@ -2,7 +2,7 @@ package ua.gmail.sydorenko.database.dao;
 
 import org.apache.log4j.Logger;
 import ua.gmail.sydorenko.database.DBManager;
-import ua.gmail.sydorenko.database.dao.exception.DaoSystemException;
+import ua.gmail.sydorenko.database.exception.DaoSystemException;
 import ua.gmail.sydorenko.database.entity.Tariff;
 import ua.gmail.sydorenko.database.entity.User;
 import ua.gmail.sydorenko.database.template.TariffTemplate;
@@ -11,6 +11,8 @@ import ua.gmail.sydorenko.database.template.Template;
 import java.util.List;
 
 /**
+ * Data access object for user related entities.
+ *
  * @author M.Sydorenko
  */
 public class UserDaoImpl implements UserDao {
@@ -44,11 +46,20 @@ public class UserDaoImpl implements UserDao {
     private DBManager manager;
     private Template template;
 
+    /**
+     * Constructor for UserDaoImpl class to initialize DBManager and Template fields.
+     *
+     * @param manager connection to database
+     * @param template object for executing SQL queries.
+     */
     public UserDaoImpl(DBManager manager, Template template) {
         this.manager = manager;
         this.template = template;
     }
 
+    /**
+     * @see UserDao#readByLogin(String)
+     */
     @Override
     public List<User> readByLogin(String login) throws DaoSystemException {
         List<User> listUsers;
@@ -61,6 +72,9 @@ public class UserDaoImpl implements UserDao {
         return listUsers;
     }
 
+    /**
+     * @see UserDao#createTariffForUser(int, int)
+     */
     @Override
     public void createTariffForUser(int userId, int tariffId) throws DaoSystemException {
         try {
@@ -71,6 +85,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     *
+     * @see UserDao#readTariffForUser(User)
+     */
     @Override
     public List<Tariff> readTariffForUser(User user) throws DaoSystemException {
         List<Tariff> tariffList;
@@ -83,6 +101,10 @@ public class UserDaoImpl implements UserDao {
         return tariffList;
     }
 
+    /**
+     *
+     * @see UserDao#deleteTariffForUser(User, int)
+     */
     @Override
     public void deleteTariffForUser(User user, int tariffId) throws DaoSystemException {
         try {
@@ -93,6 +115,12 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Get all users.
+     *
+     * @return list of all users.
+     * @throws DaoSystemException
+     */
     @Override
     public List<User> readAll() throws DaoSystemException {
         List<User> listUsers;
@@ -105,6 +133,13 @@ public class UserDaoImpl implements UserDao {
         return listUsers;
     }
 
+    /**
+     * Return list of users by id.
+     *
+     * @param id of entity object.
+     * @return list of users.
+     * @throws DaoSystemException
+     */
     @Override
     public List<User> readById(int id) throws DaoSystemException {
         List<User> listUsers;
@@ -117,6 +152,12 @@ public class UserDaoImpl implements UserDao {
         return listUsers;
     }
 
+    /**
+     * Add new user entity to data base.
+     *
+     * @param user user entity.
+     * @throws DaoSystemException
+     */
     @Override
     public void create(User user) throws DaoSystemException {
         int id = template.readNextAutoIncrement(manager, SQL_GET_NEXT_AUTOINCREMENT);
@@ -129,6 +170,12 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Update existing user in data base.
+     *
+     * @param user user entity to update.
+     * @throws DaoSystemException
+     */
     @Override
     public void update(User user) throws DaoSystemException {
         try {
@@ -140,6 +187,12 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Delete user from data base with id.
+     *
+     * @param id of entity for deleting.
+     * @throws DaoSystemException
+     */
     @Override
     public void delete(int id) throws DaoSystemException {
         try {

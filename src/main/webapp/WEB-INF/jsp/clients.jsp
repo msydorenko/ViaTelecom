@@ -6,16 +6,16 @@
 <c:set var="title" value="ViaTelecom" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
-<div>
-    <a href="viatelecom?command=locale&i18n=ru&page=clients">RU</a>
-    <a href="viatelecom?command=locale&i18n=en&page=clients">EN</a>
+<div class="flex">
+    <a href="viatelecom?command=locale&i18n=ru&page=clients"><img src="images/Russia.png"/></a>
+    <a href="viatelecom?command=locale&i18n=en&page=clients"><img src="images/United-States.png"/></a>
 </div>
 <%@ include file="/WEB-INF/templates/_menu.jspf" %>
 
 <c:if test="${not empty errorMessage}">
     <div class="">${errorMessage}</div>
 </c:if>
-<div>
+<div style="margin: 10px">
     <c:if test="${not empty completeUser && completeUser != null}">
         <table class="tabtab">
             <tr>
@@ -34,8 +34,8 @@
         </table>
     </c:if>
 </div>
-<div>
-    <form class="" method="post" action="viatelecom">
+<div style="margin: 10px">
+    <form method="post" action="viatelecom">
         <input type="hidden" name="command" value="clientData"/>
         <button class="myButton" type="submit">
             <fmt:message key="admin.button.user.add"/>

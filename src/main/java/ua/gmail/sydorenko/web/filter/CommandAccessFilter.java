@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Security filter for checking the access to different commands and pages.
+ *
  * @author M.Sydorenko
  */
-
-
 public class CommandAccessFilter implements Filter {
     private static final Logger LOG = Logger.getLogger(CommandAccessFilter.class);
     private Map<Role, List<String>> accessMap = new HashMap<>();
